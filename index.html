@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Encontrando com Deus — Primários</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#1f7ab5">
+<link rel="apple-touch-icon" href="./icone-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--azul:#1f7ab5;--azul-esc:#145a87;--verde:#3fa34d;--verde-cl:#8fd49a;
+    --amarelo:#ffc531;--laranja:#ff8a3d;--vermelho:#e35d5b;--creme:#fff8e9;--texto:#2d2a26}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{font-family:'Nunito',system-ui,sans-serif;color:var(--texto);
+    background:linear-gradient(170deg,#bfe6ff 0%,#e8f7ff 45%,#fff8e9 100%);
+    min-height:100dvh;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+  .tela{display:none;min-height:100dvh;padding:16px 14px 30px;max-width:560px;margin:0 auto}
+  .tela.ativa{display:block;animation:entra .35s ease both}
+  @keyframes entra{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  h1,h2,h3,.btn,.pontos,.placar{font-family:'Baloo 2',cursive}
+  .btn{display:block;width:100%;border:none;border-radius:18px;padding:15px 18px;font-size:1.12rem;
+    font-weight:700;color:#fff;background:var(--verde);box-shadow:0 5px 0 #2f7d3a;cursor:pointer;margin-top:12px}
+  .btn:active{transform:translateY(3px);box-shadow:0 2px 0 #2f7d3a}
+  .btn.azul{background:var(--azul);box-shadow:0 5px 0 var(--azul-esc)}
+  .btn.azul:active{box-shadow:0 2px 0 var(--azul-esc)}
+  .btn.ghost{background:#fff;color:var(--azul);box-shadow:0 5px 0 #cfe6f5}
+  .btn[disabled]{opacity:.45;cursor:default;box-shadow:0 5px 0 #b9c6cd;background:#9fb3bd}
+  .card{background:#fff;border-radius:24px;padding:18px;margin-top:14px;box-shadow:0 10px 24px rgba(20,90,135,.14)}
+  .selo{display:inline-block;background:var(--amarelo);color:#6b4b00;border-radius:999px;padding:5px 14px;font-weight:700;font-size:.82rem;letter-spacing:.5px}
+  .campo{width:100%;border:3px solid #d8ecf7;border-radius:16px;padding:14px;font-size:1.05rem;font-family:'Nunito';text-align:center;outline:none}
+  .campo:focus{border-color:var(--azul)}
+  .marca{display:block;width:132px;max-width:44%;height:auto;margin:2px auto 8px}
+  .marca-topo{width:46px;max-width:46px;margin:0;flex:0 0 46px}
+  .creditos{text-align:center;font-size:.72rem;line-height:1.45;color:#6b7b85;font-weight:600;margin:14px 2px 0}
+  .creditos b{color:var(--azul-esc);font-weight:700}
+  .card .creditos{margin-top:16px;border-top:2px dashed #e4eff6;padding-top:10px}
+  svg{display:block;width:100%;height:auto}
+  .versiculo{background:var(--creme);border-left:6px solid var(--amarelo);border-radius:12px;padding:12px 14px;font-size:.97rem;margin-top:10px}
+  .versiculo b{display:block;font-size:.78rem;color:#8a7230;margin-top:6px}
+
+  /* passaporte */
+  .passaporte{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:12px}
+  .licao-btn{position:relative;background:#fff;border:3px solid #dceefa;border-radius:18px;padding:12px 10px 10px;
+    text-align:left;font-family:'Nunito';font-weight:700;font-size:.9rem;color:var(--texto);cursor:pointer;min-height:92px}
+  .licao-btn .num{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;
+    background:var(--azul);color:#fff;font-family:'Baloo 2';font-size:.95rem;margin-bottom:6px}
+  .licao-btn.feita{border-color:var(--verde);background:#f2fbf3}
+  .licao-btn.feita .num{background:var(--verde)}
+  .licao-btn.bloqueada{opacity:.55;cursor:default;border-style:dashed}
+  .carimbo{position:absolute;top:8px;right:8px;font-size:1.1rem}
+  .estrelinhas{display:block;font-weight:700;font-size:.78rem;color:#6b7b85;margin-top:4px}
+
+  /* lição */
+  .topo{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .voltar{background:#fff;border:none;border-radius:14px;width:44px;height:44px;font-size:1.3rem;color:var(--azul);box-shadow:0 3px 0 #cfe6f5;cursor:pointer}
+  .pontos{margin-left:auto;background:var(--amarelo);color:#6b4b00;border-radius:999px;padding:8px 16px;font-size:1.02rem;font-weight:800;box-shadow:0 3px 0 #e0a800}
+  .pontos.pulo{animation:pulo .5s ease}
+  @keyframes pulo{0%{transform:scale(1)}40%{transform:scale(1.25) rotate(-4deg)}100%{transform:scale(1)}}
+  .barra{height:12px;border-radius:999px;background:#fff;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,.08)}
+  .barra i{display:block;height:100%;background:linear-gradient(90deg,var(--verde-cl),var(--verde));width:0;transition:width .4s ease}
+  .passo{font-size:.84rem;color:#5b6b76;font-weight:700;margin:6px 2px 0}
+  .card h2{font-size:1.26rem;margin:12px 0 4px;color:var(--azul-esc);line-height:1.22}
+  .ajuda{font-size:.85rem;color:#6b7b85;font-weight:600;margin:4px 0 0}
+  .opcao{width:100%;text-align:left;background:#f4fbff;border:3px solid #dceefa;border-radius:16px;padding:13px 15px;margin-top:9px;
+    font-size:1.01rem;font-weight:600;font-family:'Nunito';color:var(--texto);cursor:pointer;display:flex;gap:10px;align-items:center}
+  .opcao .bolha{min-width:30px;height:30px;border-radius:50%;background:#fff;border:2px solid #cfe6f5;display:grid;place-items:center;font-weight:800;color:var(--azul)}
+  .opcao.certa{background:#e9f9ec;border-color:var(--verde)}
+  .opcao.errada{background:#ffeceb;border-color:var(--vermelho)}
+  .opcao.marcada{background:#fff4e2;border-color:var(--amarelo)}
+  .opcao.marcada .bolha{background:var(--amarelo);color:#6b4b00;border-color:#e0a800}
+  .opcao[disabled]{cursor:default;opacity:.9}
+  .cena{display:flex;gap:10px;align-items:center;background:#f4fbff;border:3px solid #dceefa;border-radius:16px;padding:10px;margin-top:9px;width:100%;cursor:pointer;font-family:'Nunito';font-weight:600;text-align:left;font-size:.97rem}
+  .cena .mini{width:74px;flex:0 0 74px}
+  .cena .ordem{min-width:30px;height:30px;border-radius:50%;background:#fff;border:2px solid #cfe6f5;display:grid;place-items:center;font-family:'Baloo 2';color:var(--azul)}
+  .cena.escolhida{background:#fff4e2;border-color:var(--amarelo)}
+  .cena.escolhida .ordem{background:var(--amarelo);color:#6b4b00;border-color:#e0a800}
+  .cena.certa{background:#e9f9ec;border-color:var(--verde)}
+  .cena.errada{background:#ffeceb;border-color:var(--vermelho)}
+  .feedback{border-radius:16px;padding:14px;margin-top:14px;display:none}
+  .feedback.on{display:block;animation:entra .3s ease both}
+  .feedback.acerto{background:#e9f9ec;border:3px solid var(--verde-cl)}
+  .feedback.dica{background:#fff4e2;border:3px solid var(--amarelo)}
+  .feedback strong{font-family:'Baloo 2';display:block;font-size:1.08rem;margin-bottom:4px}
+  .final{background:#fff;border-radius:28px;padding:22px 18px;text-align:center;box-shadow:0 12px 30px rgba(20,90,135,.18)}
+  .final h2{font-size:1.7rem;color:var(--azul-esc);margin:10px 0 2px}
+  .placar{font-size:3rem;color:var(--laranja);line-height:1;margin:4px 0}
+</style>
+</head>
+<body>
+
+<!-- ============ TELA 1 — CAPA ============ -->
+<section class="tela ativa" id="tela-capa">
+  <div class="card" style="text-align:center;padding:20px 18px 24px;border-radius:28px">
+    <div id="marca-capa"></div>
+    <span class="selo">1º MÓDULO · PRIMÁRIOS · 7 e 8 ANOS</span>
+    <h1 style="font-size:2rem;line-height:1.05;margin:12px 0 4px;color:var(--azul-esc)">Encontrando<br>com Deus</h1>
+    <p style="margin:0 0 10px;color:#5b6b76;font-weight:600">Uma aventura missionária pela Bíblia</p>
+    <svg viewBox="0 0 320 190" role="img" aria-label="Jardim colorido com árvore, rio e animais">
+      <defs><linearGradient id="ceu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fd8ff"/><stop offset="1" stop-color="#d9f3ff"/></linearGradient></defs>
+      <rect width="320" height="140" fill="url(#ceu)" rx="18"/>
+      <circle cx="268" cy="38" r="20" fill="#ffd95e"/>
+      <ellipse cx="80" cy="40" rx="26" ry="12" fill="#fff" opacity=".85"/><ellipse cx="98" cy="36" rx="18" ry="10" fill="#fff" opacity=".85"/>
+      <path d="M0 120 Q80 100 160 118 T320 108 L320 190 L0 190Z" fill="#6cc46f"/>
+      <path d="M0 150 Q90 134 180 152 T320 142 L320 190 L0 190Z" fill="#4da64f"/>
+      <path d="M30 170 Q120 150 200 168 T320 158" stroke="#4fb3e8" stroke-width="9" fill="none" stroke-linecap="round"/>
+      <rect x="150" y="78" width="16" height="56" rx="7" fill="#8a5a2b"/>
+      <circle cx="158" cy="68" r="34" fill="#49a64b"/><circle cx="132" cy="80" r="22" fill="#5cba5e"/><circle cx="184" cy="80" r="22" fill="#5cba5e"/>
+      <circle cx="146" cy="60" r="5" fill="#e4504a"/><circle cx="172" cy="74" r="5" fill="#e4504a"/><circle cx="160" cy="88" r="5" fill="#e4504a"/>
+      <ellipse cx="62" cy="156" rx="16" ry="11" fill="#fff"/><circle cx="48" cy="150" r="8" fill="#fff"/><circle cx="45" cy="148" r="1.8" fill="#333"/>
+      <ellipse cx="246" cy="162" rx="18" ry="12" fill="#f0a04b"/><circle cx="264" cy="154" r="9" fill="#f0a04b"/><circle cx="267" cy="152" r="1.8" fill="#333"/>
+      <rect x="236" y="170" width="5" height="12" rx="2" fill="#d98a36"/><rect x="252" y="170" width="5" height="12" rx="2" fill="#d98a36"/>
+    </svg>
+    <h3 style="margin:14px 0 6px;color:var(--azul-esc)">Qual é o seu nome?</h3>
+    <input class="campo" id="nome" placeholder="Escreva aqui" maxlength="18" autocomplete="off">
+    <button class="btn" onclick="entrar()">Abrir meu passaporte ▸</button>
+    <div id="creditos-capa"></div>
+  </div>
+</section>
+
+<!-- ============ TELA 2 — PASSAPORTE ============ -->
+<section class="tela" id="tela-passaporte">
+  <div class="topo">
+    <button class="voltar" onclick="abrir('tela-capa')" aria-label="Voltar">◂</button>
+    <strong style="font-family:'Baloo 2';color:var(--azul-esc);font-size:1.1rem" id="ola">Passaporte</strong>
+    <span class="pontos" id="pontos-total">⭐ 0</span>
+  </div>
+  <div class="card" style="padding:16px">
+    <p style="margin:0 0 2px;font-weight:700;color:var(--azul-esc);font-family:'Baloo 2';font-size:1.15rem">Meu passaporte da Escola Dominical</p>
+    <p class="ajuda">A cada lição concluída você ganha um carimbo de missão.</p>
+    <div class="passaporte" id="passaporte"></div>
+  </div>
+  <button class="btn ghost" onclick="zerar()">Começar tudo de novo ↻</button>
+  <div id="creditos-passaporte"></div>
+</section>
+
+<!-- ============ TELA 3 — LIÇÃO ============ -->
+<section class="tela" id="tela-licao">
+  <div class="topo">
+    <button class="voltar" onclick="abrir('tela-passaporte')" aria-label="Voltar">◂</button>
+    <span id="marca-licao"></span>
+    <strong style="font-family:'Baloo 2';color:var(--azul-esc);font-size:1.05rem" id="titulo-licao">Lição</strong>
+    <span class="pontos" id="pontos">⭐ 0</span>
+  </div>
+  <div class="barra"><i id="barra"></i></div>
+  <p class="passo" id="passo"></p>
+  <div id="area"></div>
+</section>
+
+<!-- ============ TELA 4 — FINAL ============ -->
+<section class="tela" id="tela-final">
+  <div class="final">
+    <svg viewBox="0 0 220 120" role="img" aria-label="Estrela comemorativa">
+      <circle cx="110" cy="60" r="48" fill="#fff3cf"/>
+      <path d="M110 20 l12 26 28 4 -20 20 5 28 -25-13 -25 13 5-28 -20-20 28-4z" fill="#ffc531" stroke="#e0a800" stroke-width="3" stroke-linejoin="round"/>
+      <circle cx="40" cy="30" r="6" fill="#ff8a3d"/><circle cx="186" cy="40" r="5" fill="#3fa34d"/>
+      <circle cx="56" cy="96" r="5" fill="#1f7ab5"/><circle cx="170" cy="96" r="6" fill="#e35d5b"/>
+    </svg>
+    <h2 id="final-titulo">Muito bem!</h2>
+    <p class="placar" id="final-pontos">0</p>
+    <p style="color:#5b6b76;font-weight:600">pontos nesta lição</p>
+    <div class="versiculo" id="final-versiculo" style="text-align:left"></div>
+    <button class="btn azul" onclick="abrir('tela-passaporte')">Voltar ao passaporte ▸</button>
+    <button class="btn ghost" onclick="refazer()">Jogar esta lição de novo ↻</button>
+    <div id="creditos-final"></div>
+  </div>
+</section>
+
+<script>
+/* ===================== MARCA E CRÉDITOS ===================== */
+const LOGO = `<img class="marca" alt="Vem Cá Jovem" src="data:image/png;base64,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">`;
+const LOGO_TOPO = LOGO.replace('class="marca"','class="marca marca-topo"');
+const CREDITOS = `<p class="creditos"><b>Studio Zaik</b> · CNPJ 30.425.555/0001-46<br>Todos os direitos reservados @studioZaik<br>Criação @carloszaik</p>`;
+
+/* ===================== ILUSTRAÇÕES (originais, em SVG) ===================== */
+const artes = {
+ arca:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#dff2ff"/>
+  <path d="M0 80 Q75 70 150 82 T300 74 L300 110 L0 110Z" fill="#4fb3e8"/>
+  <path d="M70 52 h160 l-18 30 h-124z" fill="#c89b5e" stroke="#8a5a2b" stroke-width="4" stroke-linejoin="round"/>
+  <rect x="104" y="28" width="92" height="24" rx="5" fill="#e0b476" stroke="#8a5a2b" stroke-width="4"/>
+  <rect x="126" y="12" width="48" height="16" rx="4" fill="#c89b5e" stroke="#8a5a2b" stroke-width="4"/>
+  <circle cx="124" cy="40" r="4" fill="#6b4420"/><circle cx="150" cy="40" r="4" fill="#6b4420"/><circle cx="176" cy="40" r="4" fill="#6b4420"/>
+  <circle cx="254" cy="26" r="13" fill="#ffd95e"/></svg>`,
+ chuva:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#cfe3f0"/>
+  <ellipse cx="120" cy="30" rx="44" ry="20" fill="#8aa6bb"/><ellipse cx="172" cy="26" rx="34" ry="16" fill="#9db6c8"/>
+  <g stroke="#4fb3e8" stroke-width="5" stroke-linecap="round"><path d="M92 56l-6 18"/><path d="M122 56l-6 18"/><path d="M152 56l-6 18"/><path d="M182 56l-6 18"/><path d="M107 78l-5 14"/><path d="M167 78l-5 14"/></g>
+  <path d="M0 96 Q80 88 160 98 T300 92 L300 110 L0 110Z" fill="#4fb3e8"/></svg>`,
+ animais:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#f2fbe9"/>
+  <path d="M0 84 Q80 74 160 88 T300 80 L300 110 L0 110Z" fill="#6cc46f"/>
+  <ellipse cx="78" cy="68" rx="22" ry="15" fill="#f0a04b"/><circle cx="100" cy="58" r="11" fill="#f0a04b"/><circle cx="104" cy="56" r="2" fill="#333"/>
+  <rect x="66" y="80" width="6" height="12" rx="3" fill="#d98a36"/><rect x="86" y="80" width="6" height="12" rx="3" fill="#d98a36"/>
+  <ellipse cx="200" cy="66" rx="24" ry="16" fill="#b7c3cc"/><circle cx="226" cy="58" r="12" fill="#b7c3cc"/><circle cx="230" cy="56" r="2" fill="#333"/>
+  <path d="M236 62 q10 6 2 16" stroke="#b7c3cc" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <rect x="188" y="80" width="7" height="12" rx="3" fill="#9aa7b0"/><rect x="210" y="80" width="7" height="12" rx="3" fill="#9aa7b0"/>
+  <circle cx="150" cy="24" r="10" fill="#ffd95e"/></svg>`,
+ martelo:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#fff3e0"/>
+  <rect x="80" y="62" width="140" height="12" rx="4" fill="#c89b5e" stroke="#8a5a2b" stroke-width="3"/>
+  <rect x="80" y="80" width="140" height="12" rx="4" fill="#c89b5e" stroke="#8a5a2b" stroke-width="3"/>
+  <rect x="140" y="26" width="12" height="34" rx="4" fill="#8a5a2b" transform="rotate(20 146 43)"/>
+  <rect x="152" y="18" width="34" height="16" rx="4" fill="#7d8c96" transform="rotate(20 169 26)"/>
+  <circle cx="66" cy="30" r="10" fill="#ffc531"/></svg>`,
+ arcoiris:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#eaf6ff"/>
+  <g fill="none" stroke-width="9" stroke-linecap="round">
+   <path d="M60 92 a90 90 0 0 1 180 0" stroke="#e35d5b"/><path d="M74 92 a76 76 0 0 1 152 0" stroke="#ff8a3d"/>
+   <path d="M88 92 a62 62 0 0 1 124 0" stroke="#ffc531"/><path d="M102 92 a48 48 0 0 1 96 0" stroke="#3fa34d"/>
+   <path d="M116 92 a34 34 0 0 1 68 0" stroke="#1f7ab5"/></g>
+  <path d="M0 96 Q80 88 160 98 T300 92 L300 110 L0 110Z" fill="#6cc46f"/></svg>`,
+ triste:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#e8ecf2"/>
+  <ellipse cx="150" cy="34" rx="56" ry="22" fill="#9db6c8"/>
+  <path d="M150 86 C120 66 110 54 118 44 C126 34 144 38 150 50 C156 38 174 34 182 44 C190 54 180 66 150 86Z" fill="#8aa6bb"/>
+  <g stroke="#6f8599" stroke-width="4" stroke-linecap="round"><path d="M96 60l-4 10"/><path d="M204 60l4 10"/></g></svg>`,
+ barco:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#b9d7e8"/>
+  <ellipse cx="96" cy="26" rx="40" ry="16" fill="#8aa6bb"/>
+  <g stroke="#6f8599" stroke-width="4" stroke-linecap="round"><path d="M74 44l-5 12"/><path d="M104 44l-5 12"/><path d="M134 44l-5 12"/></g>
+  <path d="M96 84 h108 l-16 20 H112z" fill="#c89b5e" stroke="#8a5a2b" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M150 84 V40 l40 30z" fill="#fff6e0" stroke="#8a5a2b" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M0 98 q40-10 80 0 t80 0 t80 0 t60 0 v12 H0z" fill="#2f8fc4"/></svg>`,
+ peixe:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#cfe8f5"/>
+  <path d="M60 58 q50-34 110 0 q-60 34-110 0z" fill="#2f8fc4"/>
+  <path d="M170 58 l34-22 v44z" fill="#1f7ab5"/>
+  <circle cx="92" cy="50" r="5" fill="#fff"/><circle cx="92" cy="50" r="2" fill="#123"/>
+  <g fill="#9ed7f0"><circle cx="60" cy="30" r="5"/><circle cx="46" cy="18" r="3.5"/></g>
+  <path d="M0 96 q40-8 80 0 t80 0 t80 0 t60 0 v14 H0z" fill="#1f7ab5"/></svg>`,
+ cidade:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#ffe9c9"/>
+  <path d="M0 94 Q80 88 160 98 T300 92 L300 110 L0 110Z" fill="#e8c88a"/>
+  <g fill="#c89b5e" stroke="#8a5a2b" stroke-width="3"><rect x="70" y="52" width="40" height="42" rx="4"/>
+   <rect x="120" y="38" width="56" height="56" rx="4"/><rect x="186" y="58" width="42" height="36" rx="4"/></g>
+  <g fill="#8a5a2b"><rect x="84" y="66" width="12" height="12"/><rect x="140" y="54" width="14" height="14"/><rect x="200" y="70" width="12" height="12"/></g>
+  <circle cx="252" cy="26" r="12" fill="#ff8a3d"/></svg>`,
+ tumulo:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#ffeedd"/>
+  <path d="M0 94 Q80 86 160 98 T300 92 L300 110 L0 110Z" fill="#6cc46f"/>
+  <path d="M96 94 q6-50 54-50 q48 0 54 50z" fill="#9aa7b0"/>
+  <ellipse cx="150" cy="80" rx="30" ry="22" fill="#3c454d"/>
+  <circle cx="226" cy="84" r="20" fill="#b7c3cc" stroke="#8a949d" stroke-width="3"/>
+  <g fill="#ffd95e"><circle cx="60" cy="28" r="12"/><path d="M262 26 l3 7 8 1 -6 5 2 8 -7-4 -7 4 2-8 -6-5 8-1z"/></g></svg>`,
+ anjo:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#fff8df"/>
+  <g fill="#fff"><ellipse cx="108" cy="58" rx="26" ry="16"/><ellipse cx="192" cy="58" rx="26" ry="16"/></g>
+  <circle cx="150" cy="44" r="15" fill="#fff6d0"/><rect x="134" y="60" width="32" height="38" rx="12" fill="#fff"/>
+  <ellipse cx="150" cy="22" rx="16" ry="5" fill="none" stroke="#ffc531" stroke-width="4"/>
+  <g fill="#ffd95e"><circle cx="54" cy="36" r="6"/><circle cx="250" cy="42" r="5"/><circle cx="72" cy="76" r="4"/></g></svg>`,
+ luz:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#ffeccd"/>
+  <path d="M0 94 Q80 86 160 98 T300 92 L300 110 L0 110Z" fill="#e8c88a"/>
+  <circle cx="150" cy="36" r="22" fill="#fff6d0"/><circle cx="150" cy="36" r="12" fill="#ffc531"/>
+  <g stroke="#ffc531" stroke-width="5" stroke-linecap="round"><path d="M150 4V-2"/><path d="M112 20l-10-8"/><path d="M188 20l10-8"/><path d="M106 48H92"/><path d="M194 48h14"/></g>
+  <ellipse cx="150" cy="92" rx="34" ry="8" fill="#d9b275"/>
+  <circle cx="150" cy="76" r="10" fill="#f3c79b"/><rect x="138" y="86" width="24" height="8" rx="4" fill="#4fb3e8"/></svg>`,
+ olhos:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#eaf6ff"/>
+  <ellipse cx="150" cy="54" rx="56" ry="30" fill="#fff" stroke="#4fb3e8" stroke-width="4"/>
+  <circle cx="150" cy="54" r="16" fill="#1f7ab5"/><circle cx="150" cy="54" r="6" fill="#123"/><circle cx="144" cy="48" r="4" fill="#fff"/>
+  <g fill="#ffd95e"><circle cx="58" cy="32" r="7"/><circle cx="244" cy="80" r="6"/></g></svg>`,
+ coroa2:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#efe6ff"/>
+  <circle cx="150" cy="52" r="30" fill="#fff6d0"/>
+  <g fill="#fff"><ellipse cx="104" cy="60" rx="20" ry="13"/><ellipse cx="196" cy="60" rx="20" ry="13"/></g>
+  <circle cx="150" cy="48" r="13" fill="#f3c79b"/><rect x="136" y="62" width="28" height="30" rx="11" fill="#fff"/>
+  <g fill="#ffd95e"><path d="M150 12 l3 7 8 1 -6 5 2 8 -7-4 -7 4 2-8 -6-5 8-1z"/><circle cx="62" cy="34" r="6"/><circle cx="240" cy="30" r="5"/></g></svg>`
+,
+ sarca:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#ffe3bf"/>
+  <path d="M0 90 Q80 82 160 94 T300 88 L300 110 L0 110Z" fill="#e8c88a"/>
+  <g fill="#3fa34d"><circle cx="150" cy="78" r="16"/><circle cx="132" cy="84" r="11"/><circle cx="168" cy="84" r="11"/></g>
+  <path d="M150 20 q14 16 8 28 q-4 8-8 12 q-4-4-8-12 q-6-12 8-28z" fill="#ff8a3d"/>
+  <path d="M150 34 q8 10 4 18 q-2 5-4 7 q-2-2-4-7 q-4-8 4-18z" fill="#ffc531"/>
+  <circle cx="54" cy="28" r="11" fill="#ffd95e"/></svg>`,
+ mar:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#dff2ff"/>
+  <path d="M0 40 q30 20 30 50 v20 H0z" fill="#2f8fc4"/><path d="M300 40 q-30 20-30 50 v20 h30z" fill="#2f8fc4"/>
+  <path d="M30 96 h240 v14 H30z" fill="#e8c88a"/>
+  <g fill="#4fb3e8" opacity=".6"><path d="M18 56 q12 8 12 20"/><path d="M282 56 q-12 8-12 20"/></g>
+  <circle cx="150" cy="70" r="11" fill="#f3c79b"/><rect x="138" y="84" width="24" height="14" rx="6" fill="#e35d5b"/>
+  <circle cx="254" cy="24" r="12" fill="#ffd95e"/></svg>`,
+ cama:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#2a3f63"/>
+  <g fill="#ffd95e"><circle cx="44" cy="26" r="3"/><circle cx="262" cy="30" r="3"/><circle cx="96" cy="18" r="2.5"/>
+   <path d="M224 16 l3 7 8 1 -6 5 2 8 -7-4 -7 4 2-8 -6-5 8-1z"/></g>
+  <rect x="70" y="66" width="160" height="26" rx="8" fill="#9b8ddb"/>
+  <rect x="62" y="52" width="36" height="16" rx="6" fill="#fff"/>
+  <circle cx="92" cy="60" r="11" fill="#f3c79b"/>
+  <path d="M120 52 q10-10 22-4" stroke="#fff6d0" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <text x="150" y="44" font-family="Baloo 2,cursive" font-size="20" fill="#fff6d0">?</text></svg>`,
+ caverna:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#cfd8e0"/>
+  <path d="M0 96 Q80 88 160 98 T300 92 L300 110 L0 110Z" fill="#9aa7b0"/>
+  <path d="M90 96 q10-56 60-56 q50 0 60 56z" fill="#5c6771"/>
+  <ellipse cx="150" cy="96" rx="34" ry="10" fill="#3c454d"/>
+  <path d="M246 34 q10 10 0 20 q-10-10 0-20z" fill="#fff" opacity=".7"/>
+  <g stroke="#b7c3cc" stroke-width="4" stroke-linecap="round"><path d="M36 60h18"/><path d="M28 72h22"/></g></svg>`,
+ pao:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#fff3e0"/>
+  <ellipse cx="112" cy="68" rx="40" ry="24" fill="#d9a05b" stroke="#b07c3c" stroke-width="3"/>
+  <g stroke="#b07c3c" stroke-width="3" stroke-linecap="round"><path d="M96 56l8 8"/><path d="M112 52l8 8"/><path d="M128 56l8 8"/></g>
+  <path d="M176 52 h44 l-6 38 h-32z" fill="#9ed7f0" stroke="#4fb3e8" stroke-width="3" stroke-linejoin="round"/>
+  <rect x="176" y="46" width="44" height="8" rx="3" fill="#8a5a2b"/>
+  <circle cx="254" cy="28" r="10" fill="#ffd95e"/></svg>`,
+ brisa:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#eaf6ff"/>
+  <g stroke="#7fc4e8" stroke-width="5" stroke-linecap="round" fill="none">
+   <path d="M40 40 h90 a14 14 0 1 0-14-14"/><path d="M50 62 h120 a14 14 0 1 1-14 14"/><path d="M60 84 h70 a12 12 0 1 0-12-12"/></g>
+  <path d="M0 98 Q80 90 160 100 T300 94 L300 110 L0 110Z" fill="#6cc46f"/></svg>`,
+ trono:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#f3e8ff"/>
+  <rect x="118" y="40" width="64" height="54" rx="8" fill="#ffc531" stroke="#e0a800" stroke-width="4"/>
+  <rect x="112" y="26" width="76" height="18" rx="7" fill="#e0a800"/>
+  <g fill="#fff"><ellipse cx="74" cy="52" rx="18" ry="12"/><ellipse cx="226" cy="52" rx="18" ry="12"/></g>
+  <g fill="#9b8ddb"><path d="M60 46 q14-8 28 0 q-14 6-28 0z"/><path d="M212 46 q14-8 28 0 q-14 6-28 0z"/></g>
+  <g fill="#ffd95e"><circle cx="150" cy="18" r="6"/><circle cx="96" cy="22" r="4"/><circle cx="204" cy="22" r="4"/></g></svg>`,
+ brasa:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#ffeadb"/>
+  <rect x="104" y="72" width="92" height="20" rx="6" fill="#c89b5e" stroke="#8a5a2b" stroke-width="3"/>
+  <circle cx="150" cy="54" r="16" fill="#ff8a3d"/><circle cx="150" cy="54" r="8" fill="#ffc531"/>
+  <g stroke="#e35d5b" stroke-width="4" stroke-linecap="round"><path d="M150 26v-10"/><path d="M122 34l-7-7"/><path d="M178 34l7-7"/></g>
+  <circle cx="56" cy="32" r="9" fill="#ffd95e"/><circle cx="246" cy="36" r="7" fill="#9b8ddb"/></svg>`
+,
+ estrada:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#ffeccd"/>
+  <path d="M0 92 Q80 84 160 96 T300 90 L300 110 L0 110Z" fill="#e8c88a"/>
+  <path d="M120 110 L140 46 h20 l20 64z" fill="#d9b275"/>
+  <g stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="M149 100v-8"/><path d="M149 84v-8"/><path d="M149 68v-8"/></g>
+  <circle cx="150" cy="38" r="12" fill="#f3c79b"/><rect x="138" y="52" width="24" height="18" rx="8" fill="#4fb3e8"/>
+  <circle cx="252" cy="26" r="13" fill="#ffd95e"/><circle cx="56" cy="30" r="9" fill="#fff" opacity=".8"/></svg>`,
+ estrelas:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#1f3a63"/>
+  <g fill="#ffd95e"><path d="M60 26 l3 7 8 1 -6 5 2 8 -7-4 -7 4 2-8 -6-5 8-1z"/><path d="M150 18 l4 9 10 1 -7 6 2 10 -9-5 -9 5 2-10 -7-6 10-1z"/>
+  <path d="M232 34 l3 7 8 1 -6 5 2 8 -7-4 -7 4 2-8 -6-5 8-1z"/><circle cx="100" cy="46" r="3"/><circle cx="196" cy="52" r="3"/><circle cx="268" cy="62" r="3"/><circle cx="36" cy="64" r="3"/></g>
+  <path d="M0 88 Q80 78 160 92 T300 84 L300 110 L0 110Z" fill="#2c5a3a"/></svg>`,
+ escada:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#2a4a7a"/>
+  <g fill="#ffd95e" opacity=".9"><circle cx="48" cy="30" r="3"/><circle cx="252" cy="26" r="3"/><circle cx="90" cy="18" r="2.5"/><circle cx="214" cy="40" r="2.5"/></g>
+  <g stroke="#ffc531" stroke-width="5" stroke-linecap="round"><path d="M120 104 L142 16"/><path d="M168 104 L190 16"/>
+   <path d="M126 90h38"/><path d="M131 74h38"/><path d="M136 58h38"/><path d="M141 42h38"/><path d="M146 26h38"/></g>
+  <circle cx="98" cy="60" r="9" fill="#fff6d0"/><circle cx="210" cy="72" r="7" fill="#fff6d0"/></svg>`,
+ luta:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#ffe0c2"/>
+  <path d="M0 86 Q80 76 160 90 T300 82 L300 110 L0 110Z" fill="#6cc46f"/>
+  <path d="M0 70 Q90 62 180 74 T300 66" stroke="#4fb3e8" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <circle cx="120" cy="40" r="13" fill="#f3c79b"/><rect x="108" y="54" width="24" height="26" rx="10" fill="#e35d5b"/>
+  <circle cx="186" cy="36" r="13" fill="#fff6d0"/><rect x="174" y="50" width="24" height="30" rx="10" fill="#fff6d0"/>
+  <path d="M132 62h42" stroke="#f3c79b" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="258" cy="24" r="12" fill="#ffd95e"/></svg>`,
+ tunica:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#fff4e6"/>
+  <path d="M120 24 h60 l20 16 -14 12 -6-5v55 h-60V47l-6 5 -14-12z" fill="#ff8a3d" stroke="#d9772f" stroke-width="3" stroke-linejoin="round"/>
+  <g><rect x="120" y="54" width="60" height="8" fill="#ffc531"/><rect x="120" y="70" width="60" height="8" fill="#3fa34d"/><rect x="120" y="86" width="60" height="8" fill="#4fb3e8"/></g>
+  <circle cx="58" cy="34" r="10" fill="#ffd95e"/><circle cx="246" cy="76" r="8" fill="#e35d5b"/></svg>`,
+ sonho:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#e8e2fa"/>
+  <rect x="40" y="62" width="110" height="30" rx="10" fill="#9b8ddb"/><circle cx="66" cy="58" r="13" fill="#f3c79b"/>
+  <g fill="#fff"><circle cx="170" cy="52" r="8"/><circle cx="188" cy="42" r="11"/><ellipse cx="226" cy="34" rx="40" ry="22"/></g>
+  <g fill="#ffc531"><path d="M212 28 l3 7 8 1 -6 5 2 8 -7-4 -7 4 2-8 -6-5 8-1z"/><circle cx="242" cy="40" r="4"/><circle cx="232" cy="22" r="3"/></g></svg>`,
+ trigo:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#fff3d0"/>
+  <path d="M0 92 Q80 84 160 96 T300 90 L300 110 L0 110Z" fill="#e8c88a"/>
+  <g stroke="#c9922f" stroke-width="4" stroke-linecap="round"><path d="M110 96V44"/><path d="M150 100V36"/><path d="M190 96V44"/></g>
+  <g fill="#ffc531"><ellipse cx="110" cy="40" rx="8" ry="14"/><ellipse cx="150" cy="32" rx="9" ry="16"/><ellipse cx="190" cy="40" rx="8" ry="14"/>
+   <ellipse cx="98" cy="54" rx="6" ry="10"/><ellipse cx="122" cy="54" rx="6" ry="10"/><ellipse cx="178" cy="54" rx="6" ry="10"/><ellipse cx="202" cy="54" rx="6" ry="10"/></g>
+  <circle cx="254" cy="26" r="12" fill="#ff8a3d"/></svg>`,
+ coroa:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#fff6e0"/>
+  <path d="M96 76 L88 32 l24 18 L150 22 l38 28 24-18 -8 44z" fill="#ffc531" stroke="#e0a800" stroke-width="4" stroke-linejoin="round"/>
+  <rect x="94" y="78" width="112" height="14" rx="5" fill="#e0a800"/>
+  <circle cx="122" cy="62" r="5" fill="#e35d5b"/><circle cx="150" cy="56" r="5" fill="#3fa34d"/><circle cx="178" cy="62" r="5" fill="#1f7ab5"/></svg>`
+,
+ jardim:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#dff2ff"/>
+  <path d="M0 76 Q75 60 150 76 T300 66 L300 110 L0 110Z" fill="#6cc46f"/>
+  <rect x="140" y="30" width="14" height="50" rx="6" fill="#8a5a2b"/><circle cx="147" cy="26" r="24" fill="#49a64b"/>
+  <circle cx="126" cy="36" r="15" fill="#5cba5e"/><circle cx="168" cy="36" r="15" fill="#5cba5e"/>
+  <circle cx="140" cy="20" r="4" fill="#e4504a"/><circle cx="158" cy="32" r="4" fill="#e4504a"/>
+  <circle cx="252" cy="26" r="14" fill="#ffd95e"/>
+  <path d="M20 94 Q90 82 170 96 T300 88" stroke="#4fb3e8" stroke-width="7" fill="none" stroke-linecap="round"/></svg>`,
+ livro:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#eaf1ff"/>
+  <path d="M60 30 h80 a12 12 0 0 1 10 6 a12 12 0 0 1 10-6 h80 v54 h-80 a12 12 0 0 0-10 6 a12 12 0 0 0-10-6 h-80z" fill="#fff" stroke="#1f7ab5" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M150 36v54" stroke="#1f7ab5" stroke-width="4"/>
+  <g stroke="#bcd6ea" stroke-width="3" stroke-linecap="round"><path d="M74 46h58"/><path d="M74 58h58"/><path d="M74 70h40"/><path d="M168 46h58"/><path d="M168 58h58"/><path d="M168 70h40"/></g>
+  <path d="M150 18 l4 10 10 2 -8 7 2 10 -8-5 -8 5 2-10 -8-7 10-2z" fill="#ffc531"/></svg>`,
+ amigos:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#fff0f6"/>
+  <path d="M0 86 Q80 74 160 88 T300 80 L300 110 L0 110Z" fill="#6cc46f"/>
+  <circle cx="112" cy="54" r="14" fill="#f3c79b"/><rect x="100" y="68" width="24" height="26" rx="10" fill="#4fb3e8"/>
+  <circle cx="186" cy="54" r="14" fill="#e8b48a"/><rect x="174" y="68" width="24" height="26" rx="10" fill="#ff8a3d"/>
+  <path d="M136 74 q14-10 28 0" stroke="#e35d5b" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M149 44 q-10-10-2-16 q8-5 12 6 q4-11 12-6 q8 6-2 16 q-10 10-10 10z" fill="#e35d5b"/>
+  <circle cx="52" cy="30" r="12" fill="#ffd95e"/></svg>`,
+ sol:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#ffe7c2"/>
+  <circle cx="150" cy="62" r="30" fill="#ffc531"/>
+  <g stroke="#ff8a3d" stroke-width="6" stroke-linecap="round"><path d="M150 14v12"/><path d="M150 98v12"/><path d="M96 62H84"/><path d="M216 62h12"/><path d="M112 24l8 8"/><path d="M188 24l-8 8"/><path d="M112 100l8-8"/><path d="M188 100l-8-8"/></g>
+  <path d="M0 92 Q80 80 150 92 T300 86 L300 110 L0 110Z" fill="#6cc46f"/></svg>`,
+ arvore:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#eaf7e9"/>
+  <rect x="142" y="42" width="16" height="48" rx="7" fill="#8a5a2b"/>
+  <circle cx="150" cy="38" r="30" fill="#49a64b"/><circle cx="120" cy="50" r="19" fill="#5cba5e"/><circle cx="180" cy="50" r="19" fill="#5cba5e"/>
+  <circle cx="138" cy="30" r="6" fill="#e4504a"/><circle cx="166" cy="44" r="6" fill="#e4504a"/><circle cx="152" cy="56" r="6" fill="#e4504a"/>
+  <path d="M0 96 Q90 86 160 98 T300 92 L300 110 L0 110Z" fill="#6cc46f"/>
+  <circle cx="54" cy="26" r="13" fill="#ffd95e"/></svg>`,
+ fruta:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#eaf7e9"/>
+  <rect x="36" y="20" width="12" height="70" rx="5" fill="#8a5a2b"/><circle cx="42" cy="22" r="20" fill="#49a64b"/>
+  <path d="M70 70 q30-18 60 0 t60-6" stroke="#5e8f3b" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <circle cx="196" cy="60" r="7" fill="#3c6b26"/><circle cx="199" cy="58" r="2" fill="#fff"/>
+  <circle cx="236" cy="48" r="18" fill="#e4504a"/><path d="M236 30 q4-10 12-10" stroke="#6b8f3b" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M0 96 Q90 86 160 98 T300 92 L300 110 L0 110Z" fill="#6cc46f"/></svg>`,
+ folhas:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#f0f8ea"/>
+  <g fill="#49a64b"><path d="M150 30 q28 10 28 34 q-28 8-28-34z"/><path d="M150 30 q-28 10-28 34 q28 8 28-34z"/>
+  <path d="M110 52 q24 10 24 30 q-24 6-24-30z"/><path d="M190 52 q-24 10-24 30 q24 6 24-30z"/></g>
+  <g stroke="#2f7d3a" stroke-width="2"><path d="M150 32v32"/><path d="M114 56l16 22"/><path d="M186 56l-16 22"/></g>
+  <path d="M0 94 Q80 84 160 96 T300 90 L300 110 L0 110Z" fill="#6cc46f"/></svg>`,
+ esconde:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#e6dcf7"/>
+  <circle cx="246" cy="28" r="14" fill="#fff0b3"/>
+  <path d="M0 84 Q80 72 160 86 T300 78 L300 110 L0 110Z" fill="#4da64f"/>
+  <circle cx="92" cy="54" r="30" fill="#2f7d3a"/><circle cx="130" cy="64" r="22" fill="#3fa34d"/><circle cx="58" cy="66" r="20" fill="#3fa34d"/>
+  <circle cx="104" cy="74" r="9" fill="#f3c79b"/><circle cx="101" cy="73" r="1.8" fill="#333"/><circle cx="108" cy="73" r="1.8" fill="#333"/>
+  <path d="M100 79 q4 3 8 0" stroke="#8a5a2b" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`,
+ dedo:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#fff2e2"/>
+  <circle cx="96" cy="48" r="15" fill="#f3c79b"/><rect x="82" y="64" width="28" height="30" rx="11" fill="#4fb3e8"/>
+  <path d="M110 70 h52" stroke="#f3c79b" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="206" cy="50" r="15" fill="#e8b48a"/><rect x="192" y="66" width="28" height="28" rx="11" fill="#e35d5b"/>
+  <path d="M198 44 q8-6 16 0" stroke="#8a5a2b" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="48" cy="28" r="10" fill="#ffd95e"/></svg>`,
+ portao:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#e9e4f7"/>
+  <path d="M0 88 Q80 78 160 90 T300 84 L300 110 L0 110Z" fill="#4da64f"/>
+  <rect x="106" y="34" width="88" height="56" rx="6" fill="#c89b5e" stroke="#8a5a2b" stroke-width="4"/>
+  <path d="M150 34v56" stroke="#8a5a2b" stroke-width="4"/>
+  <circle cx="140" cy="64" r="4" fill="#6b4420"/><circle cx="160" cy="64" r="4" fill="#6b4420"/>
+  <path d="M106 34 q44-26 88 0" stroke="#8a5a2b" stroke-width="5" fill="none"/>
+  <path d="M210 40 l4 10 10 2 -8 7 2 10 -8-5 -8 5 2-10 -8-7 10-2z" fill="#ffc531"/></svg>`,
+ coracao:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#fff0f0"/>
+  <path d="M150 92 C110 66 96 50 106 36 C116 22 140 26 150 44 C160 26 184 22 194 36 C204 50 190 66 150 92Z" fill="#e35d5b"/>
+  <circle cx="64" cy="36" r="8" fill="#ffc531"/><circle cx="238" cy="44" r="10" fill="#3fa34d"/>
+  <circle cx="48" cy="80" r="6" fill="#1f7ab5"/><circle cx="252" cy="84" r="7" fill="#ff8a3d"/></svg>`,
+ cruz:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#fff6e0"/>
+  <circle cx="150" cy="52" r="34" fill="#ffe9a8"/>
+  <rect x="142" y="18" width="16" height="74" rx="5" fill="#8a5a2b"/><rect x="118" y="42" width="64" height="16" rx="5" fill="#8a5a2b"/>
+  <circle cx="60" cy="34" r="9" fill="#ffc531"/><circle cx="242" cy="40" r="7" fill="#3fa34d"/>
+  <path d="M0 94 Q80 84 160 96 T300 90 L300 110 L0 110Z" fill="#6cc46f"/></svg>`
+};
+const minis = {
+ n1:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#e8ecf2"/><ellipse cx="40" cy="18" rx="26" ry="10" fill="#9db6c8"/><g stroke="#6f8599" stroke-width="3" stroke-linecap="round"><path d="M26 30l-3 8"/><path d="M40 30l-3 8"/><path d="M54 30l-3 8"/></g></svg>`,
+ n2:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#fff3cf"/><circle cx="40" cy="20" r="11" fill="#ffc531"/><circle cx="40" cy="40" r="7" fill="#f3c79b"/></svg>`,
+ n3:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#fff3e0"/><path d="M16 26 h48 l-6 14 h-36z" fill="#c89b5e" stroke="#8a5a2b" stroke-width="3"/><rect x="28" y="14" width="24" height="12" rx="3" fill="#e0b476" stroke="#8a5a2b" stroke-width="3"/></svg>`,
+ n4:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#cfe3f0"/><ellipse cx="40" cy="14" rx="24" ry="9" fill="#8aa6bb"/><g stroke="#4fb3e8" stroke-width="4" stroke-linecap="round"><path d="M24 26l-4 10"/><path d="M40 26l-4 10"/><path d="M56 26l-4 10"/></g><path d="M0 46 Q40 40 80 44 L80 54 L0 54Z" fill="#4fb3e8"/></svg>`,
+ o1:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#b9d7e8"/><path d="M22 34h36l-6 10H28z" fill="#c89b5e"/><path d="M40 34V14l14 12z" fill="#fff6e0"/><path d="M0 46 q20-6 40 0 t40 0v8H0z" fill="#2f8fc4"/></svg>`,
+ o2:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#cfe8f5"/><path d="M16 28 q24-18 48 0 q-24 18-48 0z" fill="#2f8fc4"/><circle cx="30" cy="24" r="3" fill="#fff"/></svg>`,
+ o3:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#ffeedd"/><path d="M0 44 q40-8 80 0v10H0z" fill="#e8c88a"/><circle cx="40" cy="26" r="10" fill="#f3c79b"/><rect x="30" y="36" width="20" height="8" rx="4" fill="#4fb3e8"/></svg>`,
+ o4:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#ffe9c9"/><g fill="#c89b5e" stroke="#8a5a2b" stroke-width="2"><rect x="18" y="26" width="18" height="20"/><rect x="42" y="18" width="22" height="28"/></g></svg>`,
+ r1:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#ffeedd"/><path d="M24 46 q4-24 16-24 q12 0 16 24z" fill="#9aa7b0"/><ellipse cx="40" cy="40" rx="12" ry="8" fill="#3c454d"/></svg>`,
+ r2:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#fff8df"/><g fill="#fff"><ellipse cx="26" cy="28" rx="13" ry="8"/><ellipse cx="54" cy="28" rx="13" ry="8"/></g><circle cx="40" cy="22" r="8" fill="#fff6d0"/></svg>`,
+ r3:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#efe6ff"/><circle cx="40" cy="24" r="12" fill="#fff6d0"/><circle cx="40" cy="22" r="7" fill="#f3c79b"/></svg>`,
+ r4:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#f2fbe9"/><circle cx="26" cy="26" r="8" fill="#f3c79b"/><circle cx="52" cy="26" r="8" fill="#e8b48a"/><path d="M34 32h12" stroke="#e35d5b" stroke-width="3"/></svg>`,
+ p1:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#e8ecf2"/><circle cx="40" cy="22" r="10" fill="#e8b48a"/><rect x="30" y="34" width="20" height="12" rx="5" fill="#5c6771"/></svg>`,
+ p2:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#ffeccd"/><circle cx="40" cy="20" r="12" fill="#fff6d0"/><circle cx="40" cy="20" r="6" fill="#ffc531"/><path d="M0 44 q40-8 80 0v10H0z" fill="#e8c88a"/></svg>`,
+ p3:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#eaf1ff"/><circle cx="28" cy="26" r="9" fill="#f3c79b"/><circle cx="54" cy="26" r="9" fill="#e8b48a"/><path d="M28 16 q6-8 12-2" stroke="#9b8ddb" stroke-width="3" fill="none"/></svg>`,
+ p4:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#eaf6ff"/><ellipse cx="40" cy="26" rx="22" ry="12" fill="#fff" stroke="#4fb3e8" stroke-width="3"/><circle cx="40" cy="26" r="7" fill="#1f7ab5"/></svg>`,
+ v1:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#fff6e0"/><circle cx="40" cy="22" r="10" fill="#f3c79b"/><path d="M28 44 q12-10 24 0z" fill="#fff"/><circle cx="62" cy="14" r="4" fill="#ffd95e"/></svg>`,
+ v2:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#e8ecf2"/><g fill="#8aa6bb"><circle cx="22" cy="28" r="8"/><circle cx="40" cy="26" r="8"/><circle cx="58" cy="28" r="8"/></g></svg>`,
+ v3:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#fff8df"/><circle cx="40" cy="24" r="12" fill="#fff6d0"/><g fill="#ffd95e"><circle cx="18" cy="16" r="3"/><circle cx="62" cy="18" r="3"/></g></svg>`,
+ v4:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#efe6ff"/><path d="M36 12h8v30h-8z" fill="#8a5a2b"/><path d="M24 22h32v8H24z" fill="#8a5a2b"/></svg>`,
+ m1:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#ffe3bf"/><circle cx="40" cy="36" r="12" fill="#3fa34d"/><path d="M40 8 q8 10 4 18 q-4-4-4-6 q0 2-4 6 q-4-8 4-18z" fill="#ff8a3d"/></svg>`,
+ m2:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#e8ecf2"/><circle cx="40" cy="22" r="10" fill="#f3c79b"/><rect x="30" y="34" width="20" height="14" rx="6" fill="#4fb3e8"/><path d="M58 20h12" stroke="#8aa6bb" stroke-width="3"/></svg>`,
+ m3:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#fff3d0"/><g fill="#e35d5b"><circle cx="24" cy="24" r="6"/><circle cx="40" cy="34" r="6"/><circle cx="56" cy="22" r="6"/></g></svg>`,
+ m4:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#dff2ff"/><path d="M0 18 q10 10 10 22v14H0z" fill="#2f8fc4"/><path d="M80 18 q-10 10-10 22v14h10z" fill="#2f8fc4"/><rect x="10" y="44" width="60" height="10" fill="#e8c88a"/></svg>`,
+ s1:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#fff6e0"/><circle cx="40" cy="22" r="10" fill="#f3c79b"/><path d="M28 44 q12-10 24 0z" fill="#4fb3e8"/></svg>`,
+ s2:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#2a3f63"/><rect x="18" y="32" width="44" height="12" rx="5" fill="#9b8ddb"/><circle cx="30" cy="28" r="8" fill="#f3c79b"/><circle cx="60" cy="16" r="3" fill="#ffd95e"/></svg>`,
+ s3:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#eaf1ff"/><circle cx="28" cy="26" r="9" fill="#f3c79b"/><circle cx="54" cy="26" r="11" fill="#e8b48a"/><path d="M38 26h8" stroke="#8a5a2b" stroke-width="3"/></svg>`,
+ s4:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#f2fbe9"/><rect x="22" y="18" width="36" height="28" rx="5" fill="#c89b5e" stroke="#8a5a2b" stroke-width="3"/><circle cx="40" cy="12" r="6" fill="#ffd95e"/></svg>`,
+ e1:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#ffe0c2"/><circle cx="40" cy="22" r="10" fill="#f3c79b"/><path d="M26 44 q14-12 28 0z" fill="#e35d5b"/><path d="M62 14l8 8" stroke="#8aa6bb" stroke-width="3"/></svg>`,
+ e2:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#fff3e0"/><ellipse cx="32" cy="32" rx="16" ry="10" fill="#d9a05b"/><path d="M52 22h16l-3 22H55z" fill="#9ed7f0"/></svg>`,
+ e3:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#cfd8e0"/><path d="M22 46 q6-26 18-26 q12 0 18 26z" fill="#5c6771"/></svg>`,
+ e4:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#eaf6ff"/><g stroke="#7fc4e8" stroke-width="4" fill="none" stroke-linecap="round"><path d="M18 22h30a8 8 0 1 0-8-8"/><path d="M22 36h34a8 8 0 1 1-8 8"/></g></svg>`,
+ i1:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#f3e8ff"/><rect x="30" y="20" width="20" height="24" rx="4" fill="#ffc531"/><rect x="27" y="14" width="26" height="8" rx="3" fill="#e0a800"/></svg>`,
+ i2:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#e8ecf2"/><circle cx="40" cy="24" r="10" fill="#f3c79b"/><path d="M32 40 q8-6 16 0z" fill="#8aa6bb"/></svg>`,
+ i3:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#ffeadb"/><rect x="24" y="34" width="32" height="10" rx="4" fill="#c89b5e"/><circle cx="40" cy="24" r="9" fill="#ff8a3d"/><circle cx="40" cy="24" r="4" fill="#ffc531"/></svg>`,
+ i4:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#fff6e0"/><rect x="36" y="12" width="8" height="34" rx="3" fill="#8a5a2b"/><rect x="24" y="22" width="32" height="8" rx="3" fill="#8a5a2b"/></svg>`,
+ a1:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#ffeccd"/><circle cx="40" cy="20" r="10" fill="#f3c79b"/><rect x="30" y="32" width="20" height="16" rx="7" fill="#4fb3e8"/></svg>`,
+ a2:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#1f3a63"/><g fill="#ffd95e"><path d="M40 12l3 7 8 1-6 5 2 8-7-4-7 4 2-8-6-5 8-1z"/><circle cx="18" cy="34" r="2.5"/><circle cx="62" cy="30" r="2.5"/></g></svg>`,
+ a3:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#ffe7c2"/><path d="M0 40 Q40 32 80 38 L80 54 L0 54Z" fill="#e8c88a"/><path d="M30 54 L36 20h8l6 34z" fill="#d9b275"/></svg>`,
+ a4:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#fff6e0"/><path d="M24 36 l-4-18 11 8 9-12 9 12 11-8 -4 18z" fill="#ffc531" stroke="#e0a800" stroke-width="3" stroke-linejoin="round"/></svg>`,
+ j1:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#ffeccd"/><path d="M0 42 Q40 34 80 40 L80 54 L0 54Z" fill="#e8c88a"/><circle cx="40" cy="20" r="10" fill="#f3c79b"/><rect x="30" y="32" width="20" height="12" rx="6" fill="#e35d5b"/></svg>`,
+ j2:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#2a4a7a"/><g stroke="#ffc531" stroke-width="3" stroke-linecap="round"><path d="M30 50L38 8"/><path d="M48 50L56 8"/><path d="M32 42h18"/><path d="M35 30h18"/><path d="M38 18h18"/></g></svg>`,
+ j3:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#f2fbe9"/><rect x="18" y="26" width="44" height="20" rx="6" fill="#c89b5e" stroke="#8a5a2b" stroke-width="3"/><circle cx="40" cy="16" r="8" fill="#ffd95e"/></svg>`,
+ j4:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#ffe0c2"/><path d="M0 36 Q40 28 80 34" stroke="#4fb3e8" stroke-width="6" fill="none"/><circle cx="30" cy="20" r="8" fill="#f3c79b"/><circle cx="52" cy="18" r="8" fill="#fff6d0"/></svg>`,
+ z1:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#fff4e6"/><path d="M30 12h20l8 7-6 5-2-2v26H30V22l-2 2-6-5z" fill="#ff8a3d"/><rect x="30" y="28" width="20" height="4" fill="#3fa34d"/></svg>`,
+ z2:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#e8ecf2"/><circle cx="40" cy="30" r="14" fill="#8aa6bb"/><path d="M26 30h28" stroke="#fff" stroke-width="3"/></svg>`,
+ z3:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#e8e2fa"/><rect x="22" y="34" width="36" height="12" rx="5" fill="#9b8ddb"/><circle cx="32" cy="30" r="7" fill="#f3c79b"/><circle cx="56" cy="20" r="8" fill="#fff"/></svg>`,
+ z4:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#fff6e0"/><path d="M26 36l-4-16 10 7 8-11 8 11 10-7-4 16z" fill="#ffc531" stroke="#e0a800" stroke-width="3" stroke-linejoin="round"/></svg>`,
+ c1:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#dff2ff"/><path d="M0 38 Q40 30 80 36 L80 54 L0 54Z" fill="#6cc46f"/><rect x="36" y="16" width="7" height="24" rx="3" fill="#8a5a2b"/><circle cx="39" cy="14" r="12" fill="#49a64b"/><circle cx="28" cy="34" r="5" fill="#f3c79b"/><circle cx="52" cy="34" r="5" fill="#e8b48a"/></svg>`,
+ c2:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#eaf7e9"/><circle cx="40" cy="26" r="13" fill="#e4504a"/><path d="M40 12 q3-7 9-7" stroke="#6b8f3b" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="18" cy="34" r="5" fill="#3c6b26"/><path d="M0 44 Q40 38 80 42 L80 54 L0 54Z" fill="#6cc46f"/></svg>`,
+ c3:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#e6dcf7"/><path d="M0 40 Q40 32 80 38 L80 54 L0 54Z" fill="#4da64f"/><circle cx="26" cy="26" r="15" fill="#2f7d3a"/><circle cx="46" cy="32" r="11" fill="#3fa34d"/><circle cx="33" cy="36" r="5" fill="#f3c79b"/><circle cx="66" cy="14" r="7" fill="#fff0b3"/></svg>`,
+ c4:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#e9e4f7"/><path d="M0 42 Q40 34 80 40 L80 54 L0 54Z" fill="#4da64f"/><rect x="26" y="14" width="28" height="28" rx="4" fill="#c89b5e" stroke="#8a5a2b" stroke-width="3"/><path d="M40 14v28" stroke="#8a5a2b" stroke-width="3"/></svg>`
+};
+
+/* ===================== LIÇÕES ===================== */
+const licoes = [
+  { n:1, titulo:'O primeiro encontro na Bíblia',
+    versiculo:'“Pois o salário do pecado é a morte, mas o presente gratuito de Deus é a vida eterna.”',
+    ref:'Romanos 6.23a — Nova Almeida Atualizada (SBB)',
+    desafios:[
+      {tipo:'mc',arte:'jardim',titulo:'Onde Deus colocou o homem e a mulher para cuidar da criação?',
+       opcoes:['No Jardim do Éden','Dentro de um barco','No alto de uma montanha'],certa:0,pontos:10,
+       explica:'Isso mesmo! Deus colocou Adão e Eva no Jardim do Éden para cuidar dos animais e da natureza.',
+       dica:'Era um jardim muito especial, com um nome que começa com a letra É.'},
+      {tipo:'mc',arte:'livro',titulo:'Em qual livro da Bíblia está o primeiro encontro com Deus?',
+       opcoes:['Salmos','Gênesis, o livro do começo','Apocalipse'],certa:1,pontos:10,
+       explica:'Certo! Gênesis é o primeiro livro da Bíblia e conta como tudo começou.',
+       dica:'A revista chama esse livro de "livro do começo".'},
+      {tipo:'mc',arte:'amigos',titulo:'Para que Deus criou o ser humano?',
+       opcoes:['Para viver sozinho','Para ser amigo dEle e viver em comunhão','Para nunca falar com Ele'],certa:1,pontos:10,
+       explica:'Muito bem! Deus nos criou para ter um relacionamento com Ele, como amigos que conversam todos os dias.',
+       dica:'Pense por que Deus ia ao jardim conversar com eles todos os dias.'},
+      {tipo:'mc',arte:'sol',titulo:'Verdadeiro ou falso: o Senhor nunca se encontrava com Adão e Eva.',
+       opcoes:['Verdadeiro','Falso'],certa:1,pontos:10,
+       explica:'Falso! Deus se encontrava com eles todos os dias, como um amigo que vem visitar.',
+       dica:'Antes do pecado eles viviam em comunhão com Deus. Será que Ele ficava longe?'},
+      {tipo:'mc',arte:'arvore',titulo:'Qual era a única coisa que Deus proibiu no jardim?',
+       opcoes:['Tomar água do rio','Comer da fruta da árvore do meio do jardim','Brincar com os animais'],certa:1,pontos:15,
+       explica:'Exato. Era só uma proibição: não comer nem tocar na fruta daquela árvore, para que eles não morressem.',
+       dica:'A árvore ficava bem no meio do jardim.'},
+      {tipo:'mc',arte:'fruta',titulo:'O que a serpente fez no jardim?',
+       opcoes:['Plantou uma árvore nova','Enganou Adão e Eva para duvidarem de Deus','Ajudou a cuidar dos animais'],certa:1,pontos:15,
+       explica:'Certo! A serpente enganou os dois, e eles comeram do fruto que Deus havia proibido.',
+       dica:'Pense no que aconteceu logo antes de eles comerem o fruto.'},
+      {tipo:'mc',arte:'folhas',titulo:'O que Adão e Eva fizeram assim que comeram o fruto?',
+       opcoes:['Perceberam que estavam nus e fizeram vestes de folhas','Foram correndo contar para Deus','Plantaram outra árvore'],certa:0,pontos:15,
+       explica:'Isso! Eles se sentiram diferentes, perceberam que estavam nus e fizeram roupas com folhas de figueira.',
+       dica:'Eles usaram folhas de uma planta para se cobrir.'},
+      {tipo:'mc',arte:'dedo',titulo:'Quando Deus perguntou sobre o fruto, o que Adão fez?',
+       opcoes:['Assumiu o erro na mesma hora','Colocou a culpa em Eva','Ficou calado e foi dormir'],certa:1,pontos:20,
+       explica:'Exato. Adão culpou Eva, e Eva culpou a serpente. Mas colocar a culpa nos outros não resolve nada.',
+       dica:'Adão não quis assumir sozinho. Ele apontou para outra pessoa.'},
+      {tipo:'ordem',arte:'portao',titulo:'Coloque a história na ordem certa. Toque nas cenas do começo ao fim.',
+       itens:[{t:'Deus colocou Adão e Eva no jardim',m:'c1'},{t:'Eles comeram o fruto proibido',m:'c2'},
+              {t:'Eles se esconderam de Deus',m:'c3'},{t:'Eles saíram do Jardim do Éden',m:'c4'}],
+       ordem:[0,1,2,3],pontos:25,
+       explica:'Perfeito! Primeiro a amizade no jardim, depois a desobediência, o esconderijo e, por fim, a saída do Éden.',
+       dica:'Comece pelo tempo em que tudo estava bem, antes da desobediência.'},
+      {tipo:'multi',arte:'coracao',titulo:'Marque tudo o que devemos fazer quando pecamos.',
+       opcoes:['Se esconder','Confessar','Mentir','Pedir perdão','Assumir o erro','Culpar o colega'],
+       certas:[1,3,4],pontos:25,
+       explica:'Muito bem! Confessar, pedir perdão e assumir o erro é o caminho que nos aproxima de Deus de novo.',
+       dica:'Adão se escondeu e culpou alguém, e não deu certo. Escolha as três atitudes sinceras.'}
+    ]
+  },
+  { n:2, titulo:'Deus se encontra com Noé',
+    versiculo:'“[...] não deixes que eu me desvie dos teus mandamentos. Guardo a tua palavra no meu coração para não pecar contra ti.”',
+    ref:'Salmos 119.10,11 — Nova Almeida Atualizada (SBB)',
+    desafios:[
+      {tipo:'mc',arte:'triste',titulo:'Por que o coração de Deus ficou triste nos dias de Noé?',
+       opcoes:['Porque as pessoas faziam muitas maldades','Porque ninguém plantava árvores','Porque fazia muito calor'],certa:0,pontos:10,
+       explica:'Isso mesmo. As pessoas não se importavam com a vontade de Deus e nem em separar o certo do errado.',
+       dica:'A Terra estava cheia de pecado e violência. O que deixou Deus triste foi o jeito das pessoas.'},
+      {tipo:'mc',arte:'sol',titulo:'Quem era o homem que fazia o que era correto e se desviava do mal?',
+       opcoes:['Abraão','Noé','Moisés'],certa:1,pontos:10,
+       explica:'Certo! Noé era temente a Deus e por isso o Senhor teve um encontro com ele.',
+       dica:'É o nome que dá título à lição de hoje.'},
+      {tipo:'mc',arte:'amigos',titulo:'Quais eram os nomes dos três filhos de Noé?',
+       opcoes:['Pedro, Tiago e João','Sem, Cam e Jafé','Caim, Abel e Sete'],certa:1,pontos:10,
+       explica:'Muito bem! Sem, Cam e Jafé entraram na barca junto com Noé.',
+       dica:'Os três nomes aparecem em Gênesis 6.9 e nenhum deles é de apóstolo.'},
+      {tipo:'mc',arte:'arca',titulo:'Que missão Deus deu a Noé naquele encontro?',
+       opcoes:['Construir uma grande barca','Plantar um pomar','Cavar um poço'],certa:0,pontos:10,
+       explica:'Exato. Noé obedeceu e construiu a barca exatamente como Deus mandou.',
+       dica:'Era algo que ia flutuar quando a água chegasse.'},
+      {tipo:'mc',arte:'martelo',titulo:'Quantos andares a barca deveria ter?',
+       opcoes:['Um','Três','Dez'],certa:1,pontos:15,
+       explica:'Isso! Três andares, grandes o bastante para a família de Noé e os casais de animais.',
+       dica:'É o mesmo número de filhos que Noé tinha.'},
+      {tipo:'mc',arte:'arca',titulo:'Com que material os buracos da barca foram tapados?',
+       opcoes:['Com piche, que funcionava como cola','Com areia','Com folhas de figueira'],certa:0,pontos:15,
+       explica:'Certo! O piche vedava tudo para a água não entrar na barca.',
+       dica:'Era um material escuro e grudento, usado como cola naquele tempo.'},
+      {tipo:'mc',arte:'chuva',titulo:'Verdadeiro ou falso: as pessoas acreditaram em Noé e se arrependeram.',
+       opcoes:['Verdadeiro','Falso'],certa:1,pontos:15,
+       explica:'Falso. Elas nunca tinham visto uma chuva assim e trataram Noé como louco.',
+       dica:'Só a família de Noé entrou na barca. Isso mostra no que os outros acreditavam.'},
+      {tipo:'mc',arte:'animais',titulo:'Quem sobreviveu ao dilúvio?',
+       opcoes:['Todas as pessoas da Terra','Noé, sua família e os animais da barca','Apenas os animais'],certa:1,pontos:20,
+       explica:'Muito bem! Deus cumpriu a promessa do encontro e honrou a obediência de Noé.',
+       dica:'Pense em quem estava dentro da barca quando a chuva começou.'},
+      {tipo:'ordem',arte:'arcoiris',titulo:'Coloque a história na ordem certa. Toque nas cenas do começo ao fim.',
+       itens:[{t:'A Terra estava cheia de maldade',m:'n1'},{t:'Deus teve um encontro com Noé',m:'n2'},
+              {t:'Noé construiu a grande barca',m:'n3'},{t:'A chuva veio sobre a terra',m:'n4'}],
+       ordem:[0,1,2,3],pontos:25,
+       explica:'Perfeito! A maldade, o encontro com Deus, a obediência de Noé e, por último, o dilúvio.',
+       dica:'Comece pelo motivo da tristeza de Deus, bem antes da barca existir.'},
+      {tipo:'multi',arte:'coracao',titulo:'Marque tudo o que agrada a Deus, como fez Noé.',
+       opcoes:['Obedecer à Palavra de Deus','Fazer maldade escondido','Fazer o certo mesmo sozinho','Zombar de quem obedece','Guardar a Palavra no coração','Seguir os colegas que fazem o errado'],
+       certas:[0,2,4],pontos:25,
+       explica:'Isso mesmo! Noé obedeceu, fez o certo mesmo cercado de gente errada, e Deus o protegeu.',
+       dica:'São as três atitudes que Noé teve. As outras três são o contrário delas.'}
+    ]
+  },
+  { n:3, titulo:'O encontro de Deus com Abraão',
+    versiculo:'“Foi pela fé que Abraão, ao ser chamado por Deus, obedeceu e saiu para uma terra que Deus lhe prometeu dar.”',
+    ref:'Hebreus 11.8a — Nova Almeida Atualizada (SBB)',
+    desafios:[
+      {tipo:'mc',arte:'estrada',titulo:'O que Deus pediu a Abraão naquele encontro?',
+       opcoes:['Que ficasse na casa do pai','Que saísse da sua terra e fosse para a terra que Ele mostraria','Que construísse uma cidade'],certa:1,pontos:10,
+       explica:'Isso mesmo. Deus mandou Abraão sair da sua terra, dos parentes e da casa do pai, rumo a uma terra nova.',
+       dica:'Era um pedido de partir, não de ficar.'},
+      {tipo:'mc',arte:'sol',titulo:'Abraão conhecia o lugar para onde estava indo?',
+       opcoes:['Sim, já tinha morado lá','Não, ele nem sabia como era a terra','Sim, era a casa do tio dele'],certa:1,pontos:10,
+       explica:'Certo! Ele atravessou o país rumo a uma terra que não conhecia, confiando em Deus.',
+       dica:'Deus disse que mostraria a terra depois. Então Abraão ainda não a tinha visto.'},
+      {tipo:'mc',arte:'amigos',titulo:'Qual era o grande sonho de Abraão?',
+       opcoes:['Ser papai','Ser rei','Ter muitos camelos'],certa:0,pontos:10,
+       explica:'Muito bem! Ele não tinha filhos e Deus prometeu que dele viria uma grande nação.',
+       dica:'A promessa de Deus falava de descendência, isto é, de filhos e netos.'},
+      {tipo:'mc',arte:'estrelas',titulo:'O que Deus prometeu fazer da descendência de Abraão?',
+       opcoes:['Uma grande nação que abençoaria todos os povos','Um exército para brigar','Uma cidade só de ouro'],certa:0,pontos:10,
+       explica:'Exato. Por meio dele, todas as nações da terra seriam abençoadas.',
+       dica:'A promessa era de bênção para muita gente, não de guerra.'},
+      {tipo:'mc',arte:'estrada',titulo:'Com quantos anos Abraão atendeu ao chamado do Senhor?',
+       opcoes:['Com vinte e cinco anos','Com setenta e cinco anos','Com cem anos'],certa:1,pontos:15,
+       explica:'Isso! Mesmo com setenta e cinco anos, o coração dele se encheu de fé e ele obedeceu.',
+       dica:'Ele já era bem idoso, e os três algarismos do número formam setenta e cinco.'},
+      {tipo:'mc',arte:'amigos',titulo:'Quem Abraão levou consigo na viagem?',
+       opcoes:['Ninguém, foi sozinho','A família, o sobrinho e as riquezas que tinha','Somente os animais'],certa:1,pontos:15,
+       explica:'Certo! Ele levou a família, o sobrinho e o que pôde das riquezas adquiridas em Harã.',
+       dica:'Era uma viagem de muita gente, não de uma pessoa só.'},
+      {tipo:'mc',arte:'coroa',titulo:'Qual grande nação nasceu da descendência de Abraão?',
+       opcoes:['Egito','Israel','Babilônia'],certa:1,pontos:15,
+       explica:'Muito bem! Israel, de onde vieram reis como Davi e, mais tarde, Jesus Cristo.',
+       dica:'É o nome do povo de Deus na Bíblia.'},
+      {tipo:'mc',arte:'cruz',titulo:'Verdadeiro ou falso: Abraão viu todas as promessas se cumprirem em vida.',
+       opcoes:['Verdadeiro','Falso'],certa:1,pontos:20,
+       explica:'Falso. Abraão não viu tudo acontecer, mas creu até o fim naquele que prometeu.',
+       dica:'A fé verdadeira crê mesmo sem ver. Isso foi o que Abraão viveu.'},
+      {tipo:'ordem',arte:'estrelas',titulo:'Coloque a história na ordem certa. Toque nas cenas do começo ao fim.',
+       itens:[{t:'Deus viu fé no coração de Abraão',m:'a1'},{t:'Deus fez grandes promessas a ele',m:'a2'},
+              {t:'Abraão partiu para a terra desconhecida',m:'a3'},{t:'De sua descendência nasceu Israel',m:'a4'}],
+       ordem:[0,1,2,3],pontos:25,
+       explica:'Perfeito! Deus viu a fé, fez a promessa, Abraão obedeceu e a promessa se cumpriu.',
+       dica:'Pense no que veio antes da viagem: primeiro Deus falou com ele.'},
+      {tipo:'multi',arte:'coracao',titulo:'Marque o que Abraão precisou ter para ver as promessas de Deus.',
+       opcoes:['Fé','Pressa','Coragem','Confiança','Teimosia','Medo de Deus falhar'],
+       certas:[0,2,3],pontos:25,
+       explica:'Isso mesmo! Fé, coragem e confiança, exatamente como aparece no exercício da revista.',
+       dica:'São as três palavras do exercício: uma de duas letras, uma de sete e uma de nove.'}
+    ]
+  },
+  { n:4, titulo:'Deus se encontra com Jacó',
+    versiculo:'“[...] O seu nome não será mais Jacó. Você lutou com Deus e com os homens e venceu; por isso o seu nome será Israel.”',
+    ref:'Gênesis 32.28 — Nova Almeida Atualizada (SBB)',
+    desafios:[
+      {tipo:'mc',arte:'estrada',titulo:'Por que Jacó teve de fugir de casa?',
+       opcoes:['Porque enganou o pai para receber a bênção do irmão','Porque queria viajar','Porque perdeu as ovelhas'],certa:0,pontos:10,
+       explica:'Isso mesmo. Jacó errou com o irmão e com o pai, e acabou virando um fugitivo.',
+       dica:'O problema foi com a bênção que era do irmão dele.'},
+      {tipo:'mc',arte:'estrada',titulo:'Para qual cidade Jacó fugiu?',
+       opcoes:['Harã','Jericó','Belém'],certa:0,pontos:10,
+       explica:'Certo! Ele saiu de Berseba com destino a Harã, a casa do tio.',
+       dica:'O nome tem quatro letras e aparece na resposta da revista.'},
+      {tipo:'mc',arte:'amigos',titulo:'Qual era o nome do tio de Jacó?',
+       opcoes:['Labão','Isaque','Potifar'],certa:0,pontos:10,
+       explica:'Muito bem! Na casa de Labão, Jacó formou família e enriqueceu.',
+       dica:'Começa com a letra L.'},
+      {tipo:'mc',arte:'sonho',titulo:'O que Jacó usou como travesseiro na noite do sonho?',
+       opcoes:['Uma pedra','Um saco de trigo','Um manto dobrado'],certa:0,pontos:10,
+       explica:'Isso! Ele pegou uma pedra, deitou e foi ali que Deus falou com ele.',
+       dica:'Era algo duro que ele achou no caminho.'},
+      {tipo:'mc',arte:'escada',titulo:'O que Jacó viu no sonho?',
+       opcoes:['Um barco no mar','Uma escada da terra até o céu, com anjos subindo e descendo','Uma cidade de ouro'],certa:1,pontos:15,
+       explica:'Exato. E no alto da escada o Senhor apareceu e confirmou as promessas feitas a Abraão.',
+       dica:'Tinha anjos de Deus subindo e descendo por ela.'},
+      {tipo:'mc',arte:'escada',titulo:'Que nome Jacó deu àquele lugar?',
+       opcoes:['Betel, que significa Casa de Deus','Jaboque','Éden'],certa:0,pontos:15,
+       explica:'Certo! Ao acordar, ele sentiu grande reverência e chamou o lugar de Betel.',
+       dica:'O nome significa "Casa de Deus".'},
+      {tipo:'mc',arte:'luta',titulo:'Perto de qual rio Jacó lutou para conseguir a bênção?',
+       opcoes:['Rio Jordão','Rio Jaboque','Rio Nilo'],certa:1,pontos:15,
+       explica:'Muito bem! Foi no Jaboque, depois de atravessar a família e ficar por último.',
+       dica:'O nome começa com Ja e aparece na resposta da revista.'},
+      {tipo:'mc',arte:'coroa',titulo:'Qual novo nome Jacó recebeu depois do encontro?',
+       opcoes:['Israel','Isaque','Ismael'],certa:0,pontos:20,
+       explica:'Isso mesmo! Jacó significava enganador, e Israel quer dizer príncipe que prevalece com Deus.',
+       dica:'É o mesmo nome que o povo de Deus passou a ter.'},
+      {tipo:'ordem',arte:'luta',titulo:'Coloque a história na ordem certa. Toque nas cenas do começo ao fim.',
+       itens:[{t:'Jacó fugiu de casa depois de enganar o pai',m:'j1'},{t:'Sonhou com a escada e ouviu as promessas',m:'j2'},
+              {t:'Morou na casa de Labão e formou família',m:'j3'},{t:'Lutou no Jaboque e virou Israel',m:'j4'}],
+       ordem:[0,1,2,3],pontos:25,
+       explica:'Perfeito! A fuga, o sonho em Betel, os anos na casa do tio e o encontro no rio Jaboque.',
+       dica:'Comece pelo erro que fez Jacó sair de casa.'},
+      {tipo:'multi',arte:'coracao',titulo:'Marque o que Jacó fez para ficar perto de Deus de novo.',
+       opcoes:['Arrependeu-se de verdade','Fingiu que nada aconteceu','Orou e buscou a Deus','Culpou o irmão','Perseverou com fé','Desistiu de Deus'],
+       certas:[0,2,4],pontos:25,
+       explica:'Muito bem! Arrependimento sincero, oração e perseverança foi o caminho de Jacó.',
+       dica:'São três atitudes boas. As outras três são o contrário delas.'}
+    ]
+  },
+  { n:5, titulo:'Deus fala com José em sonho',
+    versiculo:'“[...] podemos confiar que Deus cumprirá as suas promessas.”',
+    ref:'Hebreus 10.23b — Nova Almeida Atualizada (SBB)',
+    desafios:[
+      {tipo:'mc',arte:'sonho',titulo:'De que jeito especial Deus falou com José?',
+       opcoes:['Por meio de sonhos','Por uma carta','Por um anjo na porta'],certa:0,pontos:10,
+       explica:'Isso mesmo. Os sonhos eram revelações de Deus sobre o futuro de José.',
+       dica:'Acontecia quando ele estava dormindo.'},
+      {tipo:'mc',arte:'tunica',titulo:'Que presente especial o pai deu a José?',
+       opcoes:['Uma túnica longa e colorida','Um cajado novo','Um anel de ouro'],certa:0,pontos:10,
+       explica:'Certo! Jacó deu a José uma túnica comprida e colorida, e isso aumentou o ciúme dos irmãos.',
+       dica:'Era uma roupa, cheia de cores e com mangas compridas.'},
+      {tipo:'mc',arte:'amigos',titulo:'Como os irmãos ficaram quando José contou os sonhos?',
+       opcoes:['Com mais raiva ainda','Muito alegres','Não ligaram'],certa:0,pontos:10,
+       explica:'Isso. Os sonhos diziam que José seria elevado acima deles, e a raiva aumentou.',
+       dica:'Eles já tinham ciúme por causa da túnica. O sonho piorou.'},
+      {tipo:'mc',arte:'estrada',titulo:'O que os irmãos acabaram fazendo com José?',
+       opcoes:['Venderam-no para uma caravana que ia ao Egito','Levaram-no de volta para casa','Deram-lhe um presente'],certa:0,pontos:10,
+       explica:'Exato. Eles iam deixá-lo num buraco, mas acabaram vendendo-o como escravo.',
+       dica:'Passou ali uma caravana de ismaelitas que comprava pessoas.'},
+      {tipo:'mc',arte:'coroa',titulo:'Na casa de quem José foi trabalhar no Egito?',
+       opcoes:['De Potifar, capitão do faraó','Do próprio faraó','De um pescador'],certa:0,pontos:15,
+       explica:'Certo! Mesmo como escravo, José fazia tudo bem feito e se destacou.',
+       dica:'O nome começa com Poti.'},
+      {tipo:'mc',arte:'triste',titulo:'Por que José foi parar na prisão?',
+       opcoes:['Porque roubou comida','Porque a esposa de Potifar mentiu sobre ele','Porque fugiu do trabalho'],certa:1,pontos:15,
+       explica:'Isso. Foi uma injustiça: ele sofreu na prisão por muito tempo sem ter culpa.',
+       dica:'Alguém contou uma mentira a respeito dele.'},
+      {tipo:'mc',arte:'trigo',titulo:'O que o sonho do faraó anunciava?',
+       opcoes:['Sete anos de fartura e depois sete anos de fome','Uma grande guerra','Uma longa viagem'],certa:0,pontos:15,
+       explica:'Muito bem! Pelo poder e sabedoria de Deus, José explicou o sonho ao rei.',
+       dica:'Falava de comida: primeiro muita, depois pouca.'},
+      {tipo:'mc',arte:'coroa',titulo:'O que José fez quando os irmãos vieram pedir ajuda?',
+       opcoes:['Perdoou e os salvou da fome','Mandou prendê-los','Fingiu não conhecê-los para sempre'],certa:0,pontos:20,
+       explica:'Isso mesmo! Com muitas lágrimas, José perdoou os irmãos e salvou a família da fome.',
+       dica:'Ele era um homem de Deus. Entre vingar-se e perdoar, escolheu o caminho de Deus.'},
+      {tipo:'ordem',arte:'trigo',titulo:'Coloque a história na ordem certa. Toque nas cenas do começo ao fim.',
+       itens:[{t:'José ganhou a túnica colorida do pai',m:'z1'},{t:'Os irmãos o venderam e ele foi ao Egito',m:'z2'},
+              {t:'Na prisão, explicou sonhos pelo dom de Deus',m:'z3'},{t:'Virou governador e salvou muita gente',m:'z4'}],
+       ordem:[0,1,2,3],pontos:25,
+       explica:'Perfeito! A túnica, a venda, a prisão e, por fim, o cumprimento do sonho que Deus dera.',
+       dica:'Comece pelo tempo em que José ainda estava na casa do pai.'},
+      {tipo:'multi',arte:'coracao',titulo:'Marque o que José fazia para não perder a fé.',
+       opcoes:['Continuava obedecendo a Deus','Reclamava de Deus','Fazia tudo bem feito, com dedicação','Guardava ódio dos irmãos','Confiava nas promessas de Deus','Desistia nas dificuldades'],
+       certas:[0,2,4],pontos:25,
+       explica:'Muito bem! José obedeceu, trabalhou com dedicação e confiou que Deus cumpre o que promete.',
+       dica:'Três atitudes mostram alguém firme em Deus. As outras três mostram o contrário.'}
+    ]
+  },
+  { n:6, titulo:'Deus se encontra com Moisés',
+    versiculo:'“O SENHOR o chamou do meio do fogo e disse: — Moisés! Moisés! Tire as sandálias dos pés, pois este lugar é sagrado.”',
+    ref:'Baseado em Êxodo 3 — Nova Almeida Atualizada (SBB)',
+    desafios:[
+      {tipo:'mc',arte:'sarca',titulo:'O que Moisés estava fazendo quando Deus o chamou?',
+       opcoes:['Cuidando das ovelhas e cabras do sogro','Pescando no rio','Construindo uma casa'],certa:0,pontos:10,
+       explica:'Isso mesmo. Ele cuidava do rebanho de Jetro, o sogro, sacerdote de Midiã.',
+       dica:'Era um trabalho com animais, no deserto.'},
+      {tipo:'mc',arte:'sarca',titulo:'O que Moisés viu de estranho no monte?',
+       opcoes:['Uma chama que queimava o espinheiro sem consumi-lo','Uma árvore de ouro','Um rio de fogo'],certa:0,pontos:10,
+       explica:'Certo! A planta pegava fogo e não se queimava, e Moisés chegou perto para ver.',
+       dica:'Era uma planta em chamas que continuava inteira.'},
+      {tipo:'mc',arte:'sarca',titulo:'O que Deus mandou Moisés fazer antes de falar com Ele?',
+       opcoes:['Tirar as sandálias, porque o lugar era sagrado','Subir no espinheiro','Apagar o fogo'],certa:0,pontos:10,
+       explica:'Muito bem! O chão daquele lugar era santo, e por isso Moisés tirou as sandálias.',
+       dica:'Tem a ver com os pés dele.'},
+      {tipo:'mc',arte:'mar',titulo:'Qual missão Deus deu a Moisés?',
+       opcoes:['Falar com o rei do Egito para libertar o povo de Deus','Construir um templo','Escrever um livro'],certa:0,pontos:10,
+       explica:'Exato. Deus viu o sofrimento do povo no Egito e enviou Moisés para tirá-lo de lá.',
+       dica:'Tinha a ver com o faraó e com o povo que sofria.'},
+      {tipo:'mc',arte:'triste',titulo:'Como Moisés se sentiu ao receber a missão?',
+       opcoes:['Muito confiante','Assustado e incapaz, pois achava que nem sabia falar direito','Com raiva de Deus'],certa:1,pontos:15,
+       explica:'Isso. E Deus prometeu estar com ele e capacitá-lo em cada passo.',
+       dica:'Ele perguntou a Deus como faria uma tarefa tão grande.'},
+      {tipo:'mc',arte:'trono',titulo:'Que nome Deus mandou Moisés dizer ao povo?',
+       opcoes:['O "Eu Sou" me enviou a vocês','O Rei do Egito','O Senhor dos montes'],certa:0,pontos:15,
+       explica:'Certo! O "Eu Sou", o Senhor, o Deus de Abraão, de Isaque e de Jacó.',
+       dica:'São duas palavrinhas que Deus usou para falar de si mesmo.'},
+      {tipo:'mc',arte:'chuva',titulo:'Quantas pragas Deus enviou sobre o Egito?',
+       opcoes:['Três','Dez','Cem'],certa:1,pontos:15,
+       explica:'Isso mesmo! Foram dez pragas, até o coração duro do faraó deixar os hebreus saírem.',
+       dica:'É o mesmo número de dedos das duas mãos.'},
+      {tipo:'mc',arte:'mar',titulo:'O que aconteceu no Mar Vermelho?',
+       opcoes:['O mar se abriu e o povo passou como em terra seca','O povo voltou para o Egito','Choveu quarenta dias'],certa:0,pontos:20,
+       explica:'Muito bem! Deus estava com Moisés, como havia prometido, e abriu o mar ao meio.',
+       dica:'Deus abriu um caminho onde só havia água.'},
+      {tipo:'ordem',arte:'mar',titulo:'Coloque a história na ordem certa. Toque nas cenas do começo ao fim.',
+       itens:[{t:'Moisés viu o espinheiro em chamas',m:'m1'},{t:'Deus deu a ele a missão de libertar o povo',m:'m2'},
+              {t:'Vieram as dez pragas sobre o Egito',m:'m3'},{t:'O mar se abriu e o povo atravessou',m:'m4'}],
+       ordem:[0,1,2,3],pontos:25,
+       explica:'Perfeito! A chama, o chamado, as pragas e a travessia do mar.',
+       dica:'Comece pelo que chamou a atenção de Moisés no monte.'},
+      {tipo:'multi',arte:'coracao',titulo:'Marque o que Deus faz por quem Ele chama, como fez com Moisés.',
+       opcoes:['Está com a pessoa','Deixa sozinho','Capacita para a missão','Exige perfeição antes de ajudar','Ouve o pedido de socorro de quem sofre','Esquece quem tem medo'],
+       certas:[0,2,4],pontos:25,
+       explica:'Isso mesmo! Deus acompanha, capacita e escuta quem clama a Ele com coração sincero.',
+       dica:'Lembre do que Deus prometeu a Moisés quando ele se achou incapaz.'}
+    ]
+  },
+  { n:7, titulo:'O encontro de Deus com Samuel',
+    versiculo:'“Então o Senhor veio e ficou ali. E, como havia feito antes, disse: — Samuel, Samuel! — Fala, pois o teu servo está escutando! — respondeu Samuel.”',
+    ref:'1 Samuel 3.10 — Nova Almeida Atualizada (SBB)',
+    desafios:[
+      {tipo:'mc',arte:'livro',titulo:'Onde Samuel ajudava, ainda criança?',
+       opcoes:['Na Casa de Deus, com o sacerdote Eli','Numa loja','No palácio do rei'],certa:0,pontos:10,
+       explica:'Isso mesmo. Samuel cresceu na Tenda da Congregação ajudando nos trabalhos da Casa de Deus.',
+       dica:'Era o lugar onde o povo se encontrava com Deus naquele tempo.'},
+      {tipo:'mc',arte:'amigos',titulo:'Como se chamava a mãe de Samuel, que orou pedindo um filho?',
+       opcoes:['Ana','Sara','Rute'],certa:0,pontos:10,
+       explica:'Certo! Ana orou com fé e perseverança, e Deus lhe concedeu Samuel.',
+       dica:'Um nome curto, de três letras.'},
+      {tipo:'mc',arte:'cama',titulo:'O que aconteceu quando Samuel estava deitado, certa noite?',
+       opcoes:['Ouviu uma voz chamando seu nome','Teve um pesadelo','Ouviu uma música'],certa:0,pontos:10,
+       explica:'Muito bem! A voz chamou "Samuel, Samuel!", e ele correu até Eli.',
+       dica:'Alguém chamou por ele, bem pelo nome.'},
+      {tipo:'mc',arte:'cama',titulo:'Quem Samuel pensou que o estava chamando?',
+       opcoes:['O sacerdote Eli','A mãe dele','Um amigo'],certa:0,pontos:10,
+       explica:'Exato. Ele correu até Eli, mas Eli disse que não o tinha chamado.',
+       dica:'Era a pessoa que dormia perto dele, na Casa de Deus.'},
+      {tipo:'mc',arte:'escada',titulo:'Quantas vezes a voz chamou Samuel antes de ele entender?',
+       opcoes:['Uma vez','Três vezes','Dez vezes'],certa:1,pontos:15,
+       explica:'Isso! Na terceira vez, Eli compreendeu que era o Senhor chamando o menino.',
+       dica:'Mais de duas e menos de quatro.'},
+      {tipo:'mc',arte:'sol',titulo:'O que Eli orientou Samuel a responder?',
+       opcoes:['"Fala, pois o teu servo está escutando"','"Agora não posso"','"Quem está aí?"'],certa:0,pontos:15,
+       explica:'Certo! É exatamente o versículo de hoje, em 1 Samuel 3.10.',
+       dica:'É a frase do versículo da lição.'},
+      {tipo:'mc',arte:'triste',titulo:'Qual foi a mensagem que Deus deu a Samuel naquela noite?',
+       opcoes:['Uma palavra de juízo sobre a família de Eli','Uma receita de pão','Um convite de festa'],certa:0,pontos:15,
+       explica:'Isso. Os filhos de Eli faziam o mal e ele não os corrigiu, e Deus falou sobre isso.',
+       dica:'Era uma mensagem séria sobre Eli e seus filhos.'},
+      {tipo:'mc',arte:'coracao',titulo:'O que Samuel fez com a mensagem, mesmo com medo?',
+       opcoes:['Contou tudo a Eli, sem esconder nada','Ficou calado','Mudou a mensagem'],certa:0,pontos:20,
+       explica:'Muito bem! Mesmo sendo criança, Samuel preferiu agradar a Deus e falou a verdade.',
+       dica:'Ele era obediente e temente a Deus. Escolheu agradar a quem?'},
+      {tipo:'ordem',arte:'cama',titulo:'Coloque a história na ordem certa. Toque nas cenas do começo ao fim.',
+       itens:[{t:'Ana orou e Deus lhe deu Samuel',m:'s1'},{t:'A voz chamou Samuel durante a noite',m:'s2'},
+              {t:'Eli entendeu que era o Senhor chamando',m:'s3'},{t:'Samuel contou toda a mensagem a Eli',m:'s4'}],
+       ordem:[0,1,2,3],pontos:25,
+       explica:'Perfeito! A oração de Ana, o chamado na noite, a orientação de Eli e a obediência de Samuel.',
+       dica:'Comece bem antes de Samuel nascer.'},
+      {tipo:'multi',arte:'coracao',titulo:'Marque o que agrada a Deus quando Ele nos chama.',
+       opcoes:['Escutar com atenção','Fingir que não ouviu','Responder com obediência','Esconder a verdade','Falar a verdade com coragem','Deixar para depois'],
+       certas:[0,2,4],pontos:25,
+       explica:'Isso mesmo! Samuel escutou, obedeceu e falou a verdade, mesmo sendo pequeno.',
+       dica:'Pense nas três atitudes que Samuel teve naquela noite.'}
+    ]
+  },
+  { n:8, titulo:'Deus encontra Elias na caverna',
+    versiculo:'“O SENHOR mesmo irá na frente de vocês e estará com vocês; ele não os deixará, nem os abandonará. Não tenham medo, nem fiquem desanimados.”',
+    ref:'Deuteronômio 31.8 — Nova Almeida Atualizada (SBB)',
+    desafios:[
+      {tipo:'mc',arte:'sol',titulo:'O que Elias tinha acabado de fazer antes de fugir?',
+       opcoes:['Derrotado os 450 profetas do falso deus Baal','Construído um templo','Atravessado o mar'],certa:0,pontos:10,
+       explica:'Isso mesmo. Foi uma grande vitória, e o nome de Deus foi honrado em todo o Israel.',
+       dica:'Foi uma vitória contra profetas de um deus falso.'},
+      {tipo:'mc',arte:'triste',titulo:'Por que Elias ficou com medo e fugiu?',
+       opcoes:['Porque a rainha Jezabel mandou avisar que o mataria','Porque perdeu o caminho','Porque ficou doente'],certa:0,pontos:10,
+       explica:'Certo! A ameaça veio da rainha, esposa do rei Acabe, e Elias fugiu para salvar a vida.',
+       dica:'Veio um mensageiro da rainha com uma ameaça.'},
+      {tipo:'mc',arte:'estrada',titulo:'Onde Elias parou, desanimado, depois de um dia andando pelo deserto?',
+       opcoes:['Debaixo de uma árvore','Dentro de um poço','Em cima de um muro'],certa:0,pontos:10,
+       explica:'Muito bem! Ali ele se sentiu fracassado e pensou que não merecia mais viver.',
+       dica:'Procurou sombra no deserto.'},
+      {tipo:'mc',arte:'pao',titulo:'O que o anjo levou para Elias comer?',
+       opcoes:['Pão assado e uma jarra de água','Peixe e uvas','Bolo e mel'],certa:0,pontos:10,
+       explica:'Exato. O anjo o acordou duas vezes para comer, e suas forças foram renovadas.',
+       dica:'Era comida simples: uma coisa de comer e uma de beber.'},
+      {tipo:'mc',arte:'estrada',titulo:'Por quantos dias e noites Elias caminhou até o monte Sinai?',
+       opcoes:['Sete','Quarenta','Cem'],certa:1,pontos:15,
+       explica:'Isso! Quarenta dias e quarenta noites, com as forças que Deus lhe deu.',
+       dica:'É o mesmo número de dias da chuva no tempo de Noé.'},
+      {tipo:'mc',arte:'caverna',titulo:'Onde Elias se abrigou quando chegou ao monte?',
+       opcoes:['Numa caverna','Numa tenda','Numa casa'],certa:0,pontos:15,
+       explica:'Certo! Foi ali que o Senhor teve um encontro especial com ele e perguntou: "O que você faz aqui, Elias?"',
+       dica:'É um buraco na rocha, e dá nome à lição de hoje.'},
+      {tipo:'mc',arte:'brisa',titulo:'Em que o Senhor se manifestou para Elias?',
+       opcoes:['No vento forte','No terremoto','Numa brisa suave'],certa:2,pontos:15,
+       explica:'Muito bem! Vieram ventania, terremoto e fogo, mas o Senhor se manifestou na brisa suave.',
+       dica:'Veio por último, depois das três coisas barulhentas.'},
+      {tipo:'mc',arte:'amigos',titulo:'Quantos servos fiéis Deus tinha preservado em Israel?',
+       opcoes:['Sete mil','Sete','Nenhum'],certa:0,pontos:20,
+       explica:'Isso mesmo! Elias pensava estar sozinho, mas havia sete mil que não adoraram Baal. Isso o animou.',
+       dica:'Era muito mais gente do que Elias imaginava.'},
+      {tipo:'ordem',arte:'caverna',titulo:'Coloque a história na ordem certa. Toque nas cenas do começo ao fim.',
+       itens:[{t:'Elias fugiu com medo da ameaça da rainha',m:'e1'},{t:'O anjo lhe deu pão e água',m:'e2'},
+              {t:'Ele se abrigou numa caverna no monte',m:'e3'},{t:'Deus falou numa brisa suave',m:'e4'}],
+       ordem:[0,1,2,3],pontos:25,
+       explica:'Perfeito! O medo, o cuidado de Deus pelo anjo, a caverna e a voz na brisa suave.',
+       dica:'Comece pelo motivo que fez Elias sair correndo.'},
+      {tipo:'multi',arte:'coracao',titulo:'Marque o que podemos fazer quando estamos desanimados.',
+       opcoes:['Orar e pedir ajuda a Deus','Desistir da fé','Lembrar da Palavra de Deus','Achar que Deus nos abandonou','Aceitar o cuidado de quem Deus envia','Ficar sozinho e calado'],
+       certas:[0,2,4],pontos:25,
+       explica:'Muito bem! Deus cuidou de Elias com descanso, comida e companhia, e cuida de nós também.',
+       dica:'Lembre do que Deus fez por Elias: falou com ele, mandou o anjo e mostrou que ele não estava só.'}
+    ]
+  },
+  { n:9, titulo:'Deus se encontra com Isaías',
+    versiculo:'“Porque as Escrituras Sagradas dizem: Sejam santos porque eu sou santo.”',
+    ref:'1 Pedro 1.16 — Nova Almeida Atualizada (SBB)',
+    desafios:[
+      {tipo:'mc',arte:'trono',titulo:'O que Isaías viu na visão que teve de Deus?',
+       opcoes:['O Senhor sentado num trono alto e glorioso','Um navio no mar','Uma cidade destruída'],certa:0,pontos:10,
+       explica:'Isso mesmo. No ano em que o rei Uzias morreu, Isaías viu o Criador assentado no trono.',
+       dica:'Ele viu o lugar onde um rei se senta, mas muito mais glorioso.'},
+      {tipo:'mc',arte:'trono',titulo:'Como se chamam os anjos que estavam em volta do trono?',
+       opcoes:['Serafins','Pastores','Sacerdotes'],certa:0,pontos:10,
+       explica:'Certo! Os Serafins tinham seis asas cada um.',
+       dica:'O nome começa com Sera.'},
+      {tipo:'mc',arte:'trono',titulo:'Para que os Serafins usavam as seis asas?',
+       opcoes:['Duas cobriam o rosto, duas o corpo e duas serviam para voar','Todas para voar','Para carregar o trono'],certa:0,pontos:10,
+       explica:'Muito bem! Duas no rosto, duas no corpo e duas para voar ao redor do trono.',
+       dica:'As asas tinham três usos, dois pares para cada um.'},
+      {tipo:'mc',arte:'brisa',titulo:'O que os Serafins declaravam uns aos outros?',
+       opcoes:['"Santo, santo, santo é o Senhor Todo-Poderoso"','"Paz na terra"','"O rei chegou"'],certa:0,pontos:10,
+       explica:'Exato. Com o barulho das vozes, os alicerces do Templo tremiam e tudo se encheu de fumaça.',
+       dica:'Uma palavra repetida três vezes, a mesma do versículo de hoje.'},
+      {tipo:'mc',arte:'triste',titulo:'Como Isaías se sentiu diante da santidade de Deus?',
+       opcoes:['Sentiu que era pecador e de lábios impuros','Sentiu-se merecedor','Não sentiu nada'],certa:0,pontos:15,
+       explica:'Isso. Ele disse: "Ai de mim", pois reconheceu seu pecado diante da pureza de Deus.',
+       dica:'Ele falou sobre os próprios lábios.'},
+      {tipo:'mc',arte:'brasa',titulo:'O que o Serafim trouxe para tocar os lábios de Isaías?',
+       opcoes:['Uma brasa tirada do altar de Deus','Um copo de água','Um pedaço de pão'],certa:0,pontos:15,
+       explica:'Certo! Com a brasa, suas culpas foram tiradas e os pecados perdoados.',
+       dica:'Veio do altar e estava em brasa.'},
+      {tipo:'mc',arte:'sol',titulo:'O que Isaías respondeu quando Deus procurou alguém para enviar?',
+       opcoes:['"Eu estou aqui. Envia a mim!"','"Manda outra pessoa"','Ficou em silêncio'],certa:0,pontos:15,
+       explica:'Muito bem! Isaías se apresentou de coração puro e foi capacitado por Deus.',
+       dica:'Ele se ofereceu na mesma hora.'},
+      {tipo:'mc',arte:'cruz',titulo:'O que o profeta Isaías anunciou muito antes de acontecer?',
+       opcoes:['A vinda do Salvador, Jesus Cristo','O fim do mundo naquele ano','A construção de um palácio'],certa:0,pontos:20,
+       explica:'Isso mesmo! Ele anunciou o nascimento, a vida e a entrega de Jesus pelos nossos pecados.',
+       dica:'Falava de alguém que ainda ia nascer para nos salvar.'},
+      {tipo:'ordem',arte:'brasa',titulo:'Coloque a história na ordem certa. Toque nas cenas do começo ao fim.',
+       itens:[{t:'Isaías viu o Senhor no trono glorioso',m:'i1'},{t:'Reconheceu que era pecador',m:'i2'},
+              {t:'A brasa do altar tocou seus lábios',m:'i3'},{t:'Ele anunciou a vinda do Salvador',m:'i4'}],
+       ordem:[0,1,2,3],pontos:25,
+       explica:'Perfeito! A visão, o arrependimento, a purificação e a missão de profeta.',
+       dica:'Comece pela visão do trono, antes de Isaías falar qualquer coisa.'},
+      {tipo:'multi',arte:'coracao',titulo:'Marque o que deixa o coração mais puro diante de Deus.',
+       opcoes:['Orar','Mentir','Perdoar','Brigar','Ler a Bíblia','Guardar rancor'],
+       certas:[0,2,4],pontos:25,
+       explica:'Muito bem! Orar, perdoar e ler a Palavra aproximam o coração de Deus, como no exercício da revista.',
+       dica:'Três atitudes aproximam de Deus e três afastam.'}
+    ]
+  },
+  { n:10, titulo:'A fuga de Jonas após o encontro',
+    versiculo:'“Voltem para o Senhor, nosso Deus, pois ele tem compaixão e perdoa completamente.”',
+    ref:'Isaías 55.7b — Nova Almeida Atualizada (SBB)',
+    desafios:[
+      {tipo:'mc',arte:'cidade',titulo:'Qual missão Deus deu a Jonas?',
+       opcoes:['Levar uma mensagem urgente aos moradores de Nínive','Construir um navio','Ser rei de Israel'],certa:0,pontos:10,
+       explica:'Isso mesmo. Nínive era uma cidade pecadora, e Deus queria dar a ela uma chance de se arrepender.',
+       dica:'Era uma mensagem para uma cidade inteira.'},
+      {tipo:'mc',arte:'barco',titulo:'O que Jonas fez em vez de obedecer?',
+       opcoes:['Fugiu na direção contrária, de navio','Foi correndo a Nínive','Pediu ajuda a um amigo'],certa:0,pontos:10,
+       explica:'Certo! Ele comprou passagem em Jope achando que estava indo para longe do Senhor.',
+       dica:'Ele tomou o caminho oposto ao que Deus mandou.'},
+      {tipo:'mc',arte:'chuva',titulo:'O que Deus mandou sobre o mar?',
+       opcoes:['Um vento forte e uma grande tempestade','Uma neblina','Um calor muito forte'],certa:0,pontos:10,
+       explica:'Muito bem! A chuva era tão forte que parecia que o barco ia se partir ao meio.',
+       dica:'Era algo que balançava o navio e assustou os marinheiros.'},
+      {tipo:'mc',arte:'barco',titulo:'O que Jonas estava fazendo durante a tempestade?',
+       opcoes:['Dormindo no porão do navio','Remando','Orando no convés'],certa:0,pontos:10,
+       explica:'Exato. O capitão foi acordá-lo para que ele também clamasse a Deus.',
+       dica:'Todos trabalhavam e oravam, menos ele.'},
+      {tipo:'mc',arte:'barco',titulo:'Como os marinheiros descobriram quem era o culpado?',
+       opcoes:['Tiraram sorte, e caiu em Jonas','Perguntaram ao capitão','Procuraram nas bagagens'],certa:0,pontos:15,
+       explica:'Isso! Tirar sorte era um jeito antigo de perguntar algo a Deus, e Jonas reconheceu a fuga.',
+       dica:'Era um costume antigo para perguntar algo a Deus.'},
+      {tipo:'mc',arte:'peixe',titulo:'O que Deus preparou quando Jonas foi lançado ao mar?',
+       opcoes:['Um grande peixe que o engoliu','Um bote salva-vidas','Uma ilha'],certa:0,pontos:15,
+       explica:'Certo! Assim que Jonas foi lançado ao mar, a tempestade parou, e um grande peixe o engoliu.',
+       dica:'Era um animal bem grande, do próprio mar.'},
+      {tipo:'mc',arte:'peixe',titulo:'Quantos dias Jonas ficou dentro do peixe?',
+       opcoes:['Um dia','Três dias','Trinta dias'],certa:1,pontos:15,
+       explica:'Muito bem! Foram três dias, e ali ele orou arrependido, pedindo que Deus o livrasse.',
+       dica:'São mais de dois e menos de quatro.'},
+      {tipo:'mc',arte:'cidade',titulo:'O que aconteceu quando Jonas finalmente pregou em Nínive?',
+       opcoes:['Ninguém ouviu','Os moradores se arrependeram e Deus não os castigou','A cidade foi destruída na hora'],certa:1,pontos:20,
+       explica:'Isso mesmo! Até o rei mandou todos se humilharem, e Deus, misericordioso, os perdoou.',
+       dica:'Deus é misericordioso com quem se arrepende de coração.'},
+      {tipo:'ordem',arte:'peixe',titulo:'Coloque a história na ordem certa. Toque nas cenas do começo ao fim.',
+       itens:[{t:'Jonas fugiu de navio',m:'o1'},{t:'Um grande peixe o engoliu',m:'o2'},
+              {t:'Arrependido, foi cuspido na praia',m:'o3'},{t:'Pregou e Nínive se arrependeu',m:'o4'}],
+       ordem:[0,1,2,3],pontos:25,
+       explica:'Perfeito! A fuga, o peixe, o arrependimento e a obediência que salvou uma cidade inteira.',
+       dica:'Comece pelo que Jonas fez quando ouviu a missão.'},
+      {tipo:'multi',arte:'coracao',titulo:'Marque o que é verdade sobre esta história.',
+       opcoes:['Deus mandou a tempestade por causa da desobediência','Jonas obedeceu logo na primeira vez','Deus deu a Jonas uma nova chance','Jonas não se arrependeu no peixe','Nínive se arrependeu e foi poupada','Deus desistiu de Nínive'],
+       certas:[0,2,4],pontos:25,
+       explica:'Muito bem! São exatamente as afirmações certas do exercício da revista.',
+       dica:'Três afirmações estão certas. Pense no que realmente aconteceu com Jonas e com a cidade.'}
+    ]
+  },
+  { n:11, titulo:'O primeiro encontro com Jesus ressuscitado',
+    versiculo:'“Agora já não existe nenhuma condenação para as pessoas que estão unidas com Cristo Jesus.”',
+    ref:'Romanos 8.1 — Nova Almeida Atualizada (SBB)',
+    desafios:[
+      {tipo:'mc',arte:'cruz',titulo:'Por que Jesus veio ao mundo e morreu por nós?',
+       opcoes:['Para pagar o preço dos nossos pecados e nos dar acesso ao Pai','Para ser rei do Egito','Para construir o Templo'],certa:0,pontos:10,
+       explica:'Isso mesmo. Ele ensinou, curou, perdoou pecados e anunciou que morreria por nós.',
+       dica:'Tem a ver com perdão e com voltar a ter amizade com Deus.'},
+      {tipo:'mc',arte:'tumulo',titulo:'Em qual dia da semana Jesus ressuscitou?',
+       opcoes:['Sábado','Domingo','Sexta-feira'],certa:1,pontos:10,
+       explica:'Certo! Foi no domingo pela manhã que as mulheres foram ao túmulo.',
+       dica:'É o mesmo dia da Escola Dominical.'},
+      {tipo:'mc',arte:'tumulo',titulo:'Por que as duas Marias foram ao túmulo?',
+       opcoes:['Para levar especiarias e perfumar o corpo','Para procurar os discípulos','Para falar com os guardas'],certa:0,pontos:10,
+       explica:'Muito bem! Era um costume dos judeus, e elas pensavam que encontrariam Jesus morto.',
+       dica:'Levavam perfumes, segundo o costume daquele tempo.'},
+      {tipo:'mc',arte:'anjo',titulo:'O que elas encontraram ao chegar?',
+       opcoes:['A pedra do túmulo removida','A porta trancada','O jardim vazio'],certa:0,pontos:10,
+       explica:'Exato. Houve um grande terremoto, e um anjo desceu, removeu a pedra e sentou-se sobre ela.',
+       dica:'Algo muito pesado tinha saído do lugar.'},
+      {tipo:'mc',arte:'anjo',titulo:'O que o anjo disse às mulheres?',
+       opcoes:['"Não tenham medo! Vocês procuram entre os mortos aquele que vive"','"Voltem para casa"','"Fiquem aqui e esperem"'],certa:0,pontos:15,
+       explica:'Isso! O anjo mandou que fossem depressa avisar os discípulos.',
+       dica:'Começa dizendo para elas não terem medo.'},
+      {tipo:'mc',arte:'coroa2',titulo:'Quem teve o primeiro encontro com Jesus ressuscitado?',
+       opcoes:['Pedro','Maria Madalena','Tomé'],certa:1,pontos:15,
+       explica:'Certo! Ela, que tinha sido liberta e perdoada, foi a primeira a ver Jesus vivo.',
+       dica:'Era uma das duas mulheres que foram ao túmulo, aquela que foi liberta de sete demônios.'},
+      {tipo:'mc',arte:'coroa2',titulo:'O que Jesus disse ao encontrá-las no caminho?',
+       opcoes:['"Que a paz esteja com vocês!"','"Por que vieram aqui?"','"Voltem amanhã"'],certa:0,pontos:15,
+       explica:'Muito bem! Elas chegaram perto, abraçaram seus pés e o adoraram.',
+       dica:'É uma saudação de paz.'},
+      {tipo:'mc',arte:'amigos',titulo:'Onde Jesus prometeu que encontraria os discípulos?',
+       opcoes:['Na Galileia','Em Jerusalém','Em Nínive'],certa:0,pontos:20,
+       explica:'Isso mesmo! O anjo e o próprio Jesus mandaram avisar que o veriam na Galileia.',
+       dica:'O nome começa com Gali.'},
+      {tipo:'ordem',arte:'tumulo',titulo:'Coloque a história na ordem certa. Toque nas cenas do começo ao fim.',
+       itens:[{t:'As mulheres foram ao túmulo de Jesus',m:'r1'},{t:'O anjo removeu a pedra e falou com elas',m:'r2'},
+              {t:'Jesus ressuscitado as encontrou no caminho',m:'r3'},{t:'Elas avisaram os discípulos',m:'r4'}],
+       ordem:[0,1,2,3],pontos:25,
+       explica:'Perfeito! A ida ao túmulo, o anjo, o encontro com Jesus vivo e a boa notícia contada a todos.',
+       dica:'Comece pela manhã de domingo, antes de elas verem qualquer coisa.'},
+      {tipo:'multi',arte:'coracao',titulo:'Marque a boa notícia que Jesus mandou contar a todos.',
+       opcoes:['Jesus está vivo','A morte venceu','Deus perdoa quem se arrepende','Não há mais esperança','Em Jesus somos limpos e salvos','Só algumas pessoas podem ser salvas'],
+       certas:[0,2,4],pontos:25,
+       explica:'Muito bem! A vida venceu a morte, e essa notícia é para pessoas de todos os lugares.',
+       dica:'Três frases são boas notícias do Evangelho. As outras três dizem o contrário.'}
+    ]
+  },
+  { n:12, titulo:'O encontro que mudou a vida de Saulo',
+    versiculo:'“Quem está unido com Cristo é uma nova pessoa; acabou-se o que era velho, e já chegou o que é novo.”',
+    ref:'2 Coríntios 5.17 — Nova Almeida Atualizada (SBB)',
+    desafios:[
+      {tipo:'mc',arte:'triste',titulo:'O que Saulo fazia antes do encontro com Jesus?',
+       opcoes:['Perseguia e prendia os cristãos','Pregava nas sinagogas','Cuidava de ovelhas'],certa:0,pontos:10,
+       explica:'Isso mesmo. Ele ameaçava, maltratava e prendia os que aceitavam Jesus como Salvador.',
+       dica:'Ele achava que estava agradando a Deus fazendo mal aos cristãos.'},
+      {tipo:'mc',arte:'estrada',titulo:'Para qual cidade Saulo estava indo?',
+       opcoes:['Damasco','Nínive','Belém'],certa:0,pontos:10,
+       explica:'Certo! Ele levava cartas de autorização para prender os seguidores de Jesus em Damasco.',
+       dica:'O nome aparece na resposta da revista e começa com Da.'},
+      {tipo:'mc',arte:'luz',titulo:'O que aconteceu na estrada?',
+       opcoes:['Uma luz do céu brilhou forte e ele caiu ao chão','Começou a chover','O cavalo fugiu sozinho'],certa:0,pontos:10,
+       explica:'Muito bem! A luz foi tão forte que ele caiu e não conseguia mais enxergar.',
+       dica:'Veio do céu e era muito brilhante.'},
+      {tipo:'mc',arte:'luz',titulo:'O que a voz perguntou a Saulo?',
+       opcoes:['"Saulo, Saulo, por que você me persegue?"','"Saulo, para onde você vai?"','"Saulo, quem é você?"'],certa:0,pontos:10,
+       explica:'Exato. E quando ele perguntou quem era, a resposta foi: "Eu sou Jesus, aquele que você persegue".',
+       dica:'A pergunta repete o nome dele duas vezes.'},
+      {tipo:'mc',arte:'olhos',titulo:'Quantos dias Saulo ficou cego, sem comer nem beber?',
+       opcoes:['Um dia','Três dias','Sete dias'],certa:1,pontos:15,
+       explica:'Isso! Os homens o levaram pela mão até Damasco e ali ele ficou três dias sem ver.',
+       dica:'O mesmo número de dias de Jonas dentro do peixe.'},
+      {tipo:'mc',arte:'amigos',titulo:'Qual era o nome do cristão que Deus enviou a Saulo?',
+       opcoes:['Ananias','Barnabé','Timóteo'],certa:0,pontos:15,
+       explica:'Certo! Ananias sentiu medo, mas obedeceu e foi até a casa da Rua Direita.',
+       dica:'O nome começa com Ana.'},
+      {tipo:'mc',arte:'olhos',titulo:'O que aconteceu quando Ananias orou por Saulo?',
+       opcoes:['Escamas caíram de seus olhos e ele voltou a enxergar','Ele adormeceu','Ele ficou mudo'],certa:0,pontos:15,
+       explica:'Muito bem! Logo depois ele foi batizado, comeu e ficou revigorado.',
+       dica:'Tem a ver com os olhos dele, que estavam cegos.'},
+      {tipo:'mc',arte:'cruz',titulo:'O que Saulo passou a fazer depois do encontro?',
+       opcoes:['Pregar que Jesus é o Filho de Deus','Voltar a prender cristãos','Ficar quieto em casa'],certa:0,pontos:20,
+       explica:'Isso mesmo! De perseguidor, Paulo se tornou um grande pregador e ganhou muitas almas para Jesus.',
+       dica:'Ele passou a falar exatamente o contrário do que dizia antes.'},
+      {tipo:'ordem',arte:'luz',titulo:'Coloque a história na ordem certa. Toque nas cenas do começo ao fim.',
+       itens:[{t:'Saulo perseguia os cristãos',m:'p1'},{t:'A luz do céu o derrubou na estrada',m:'p2'},
+              {t:'Ananias foi até ele e orou',m:'p3'},{t:'Ele voltou a ver e pregou sobre Jesus',m:'p4'}],
+       ordem:[0,1,2,3],pontos:25,
+       explica:'Perfeito! A perseguição, o encontro na estrada, a oração de Ananias e a nova vida de pregador.',
+       dica:'Comece por como Saulo era antes de conhecer Jesus.'},
+      {tipo:'multi',arte:'coracao',titulo:'Marque o que um encontro verdadeiro com Jesus faz na vida de alguém.',
+       opcoes:['Transforma o coração','Deixa a pessoa igual','Traz perdão para quem se arrepende','Serve só para gente boa','Dá uma nova missão','Depende de a pessoa nunca ter errado'],
+       certas:[0,2,4],pontos:25,
+       explica:'Muito bem! Saulo errou muito, se arrependeu e virou outra pessoa: nova criatura em Cristo.',
+       dica:'Lembre do versículo de hoje: quem está com Cristo é uma nova pessoa.'}
+    ]
+  },
+  { n:13, titulo:'O encontro do Senhor com Estêvão',
+    versiculo:'“Felizes as pessoas que sofrem perseguições por fazerem a vontade de Deus, pois o Reino do Céu é delas.”',
+    ref:'Mateus 5.10 — Nova Almeida Atualizada (SBB)',
+    desafios:[
+      {tipo:'mc',arte:'livro',titulo:'Quem era Estêvão?',
+       opcoes:['Um pregador cheio do Espírito Santo','Um soldado romano','Um pescador'],certa:0,pontos:10,
+       explica:'Isso mesmo. Ele anunciava o Evangelho com ousadia, e Deus fazia muitos milagres por suas mãos.',
+       dica:'Ele falava a Palavra de Deus com muita coragem.'},
+      {tipo:'mc',arte:'livro',titulo:'Por que ele ganhava todas as discussões sobre a Palavra?',
+       opcoes:['Porque o Espírito Santo lhe dava sabedoria','Porque falava mais alto','Porque tinha muitos livros'],certa:0,pontos:10,
+       explica:'Certo! A sabedoria vinha do Espírito Santo, não dele mesmo.',
+       dica:'Não era força nem estudo: era alguém agindo nele.'},
+      {tipo:'mc',arte:'triste',titulo:'Do que Estêvão foi acusado falsamente?',
+       opcoes:['De falar mal do nome de Deus e da Lei','De roubar o Templo','De fugir da cidade'],certa:0,pontos:10,
+       explica:'Muito bem! Inventaram mentiras contra ele porque não conseguiam vencer seus argumentos.',
+       dica:'As acusações eram sobre o que ele supostamente falava de Deus.'},
+      {tipo:'mc',arte:'cidade',titulo:'Para onde Estêvão foi levado?',
+       opcoes:['Ao Conselho Superior dos líderes judeus','Ao palácio do rei do Egito','A uma sinagoga em Damasco'],certa:0,pontos:10,
+       explica:'Exato. Ali ele foi julgado, e mostrou pelas Escrituras que eles é que estavam errados.',
+       dica:'Era o grupo de líderes que julgava as pessoas.'},
+      {tipo:'mc',arte:'anjo',titulo:'O que aconteceu com o rosto de Estêvão no julgamento?',
+       opcoes:['Brilhou, parecendo o rosto de um anjo','Ficou pálido de medo','Ficou coberto'],certa:0,pontos:15,
+       explica:'Isso! Mesmo acusado, ele estava cheio do Espírito Santo e seu rosto brilhava.',
+       dica:'Ficou parecido com um ser do céu.'},
+      {tipo:'mc',arte:'livro',titulo:'O que Estêvão mostrou nas Escrituras?',
+       opcoes:['Que os judeus rejeitaram muitas vezes a mensagem de Deus','Que o Templo seria maior','Que ele era inocente de tudo'],certa:0,pontos:15,
+       explica:'Certo! Ele mostrou, de Abraão a Salomão, as vezes em que o povo endureceu o coração.',
+       dica:'Ele contou a história do próprio povo, desde Abraão.'},
+      {tipo:'mc',arte:'trono',titulo:'Que visão Estêvão teve?',
+       opcoes:['Viu a glória de Deus e Jesus em pé ao lado direito do Pai','Viu um anjo com uma espada','Viu o Templo em chamas'],certa:0,pontos:15,
+       explica:'Muito bem! Que encontro maravilhoso, bem no momento mais difícil da vida dele.',
+       dica:'Ele olhou para o céu e viu o Senhor Jesus.'},
+      {tipo:'mc',arte:'coracao',titulo:'O que Estêvão orou enquanto era apedrejado?',
+       opcoes:['Pediu que Jesus recebesse seu espírito e não condenasse aquela gente','Pediu vingança','Não disse nada'],certa:0,pontos:20,
+       explica:'Isso mesmo! Ele foi corajoso até o fim, perdoou e não negou a fé em Jesus Cristo.',
+       dica:'Na oração dele havia perdão para quem o machucava.'},
+      {tipo:'ordem',arte:'coroa2',titulo:'Coloque a história na ordem certa. Toque nas cenas do começo ao fim.',
+       itens:[{t:'Estêvão pregava com ousadia e fazia milagres',m:'v1'},{t:'Foi acusado falsamente e julgado',m:'v2'},
+              {t:'Seu rosto brilhou e ele viu a glória de Deus',m:'v3'},{t:'Orou perdoando e foi encontrar o Senhor',m:'v4'}],
+       ordem:[0,1,2,3],pontos:25,
+       explica:'Perfeito! A pregação, a acusação, a visão do céu e a oração de perdão até o fim.',
+       dica:'Comece pelo tempo em que ele ainda pregava livremente.'},
+      {tipo:'multi',arte:'coracao',titulo:'Marque o que nos tornamos quando temos um encontro com Jesus.',
+       opcoes:['Corajosos','Mentirosos','Bondosos','Vingativos','Perdoadores','Orgulhosos'],
+       certas:[0,2,4],pontos:25,
+       explica:'Muito bem! Corajosos, bondosos e capazes de perdoar, exatamente como Estêvão foi até o fim.',
+       dica:'Pense nas três qualidades que Estêvão mostrou diante do Conselho.'}
+    ]
+  }
+];
+
+/* ===================== SALVAMENTO NO APARELHO ===================== */
+const CHAVE='ebd-primarios-1a';
+let dados={nome:'',licoes:{}};
+function carregar(){try{const s=localStorage.getItem(CHAVE);if(s)dados=Object.assign(dados,JSON.parse(s));}catch(e){}}
+function salvar(){try{localStorage.setItem(CHAVE,JSON.stringify(dados));}catch(e){}}
+carregar();
+
+/* ===================== NAVEGAÇÃO ===================== */
+function abrir(id){
+  document.querySelectorAll('.tela').forEach(t=>t.classList.remove('ativa'));
+  document.getElementById(id).classList.add('ativa');
+  window.scrollTo(0,0);
+  if(id==='tela-passaporte') desenharPassaporte();
+}
+function entrar(){
+  const n=document.getElementById('nome').value.trim();
+  if(n){dados.nome=n;salvar();}
+  abrir('tela-passaporte');
+}
+function totalPontos(){return Object.values(dados.licoes).reduce((a,l)=>a+(l.pontos||0),0);}
+
+function desenharPassaporte(){
+  document.getElementById('ola').textContent = dados.nome ? 'Olá, '+dados.nome+'!' : 'Meu passaporte';
+  document.getElementById('pontos-total').textContent='⭐ '+totalPontos();
+  document.getElementById('passaporte').innerHTML = licoes.map(l=>{
+    const feito=dados.licoes[l.n];
+    const cls = l.emBreve ? 'licao-btn bloqueada' : (feito?'licao-btn feita':'licao-btn');
+    const extra = l.emBreve ? '<span class="estrelinhas">em breve</span>'
+      : (feito?`<span class="estrelinhas">⭐ ${feito.pontos} pontos</span>`:'<span class="estrelinhas">toque para começar</span>');
+    const carimbo = (!l.emBreve && feito) ? '<span class="carimbo">🛂</span>' : '';
+    const acao = l.emBreve ? '' : `onclick="iniciar(${l.n})"`;
+    return `<button class="${cls}" ${acao}>${carimbo}<span class="num">${l.n}</span><br>${l.titulo}${extra}</button>`;
+  }).join('');
+  if(dados.nome) document.getElementById('nome').value=dados.nome;
+}
+
+/* ===================== MOTOR DA LIÇÃO ===================== */
+let licao=null, atual=0, pontos=0, escolhaOrdem=[], escolhaMulti=[];
+
+function iniciar(n){
+  licao=licoes.find(l=>l.n===n); atual=0; pontos=0;
+  document.getElementById('titulo-licao').textContent='Lição '+n;
+  document.getElementById('pontos').textContent='⭐ 0';
+  montar(); abrir('tela-licao');
+}
+function refazer(){iniciar(licao.n);}
+
+function montar(){
+  const d=licao.desafios[atual];
+  escolhaOrdem=[]; escolhaMulti=[];
+  document.getElementById('passo').textContent=`Desafio ${atual+1} de ${licao.desafios.length}`;
+  document.getElementById('barra').style.width=(atual/licao.desafios.length*100)+'%';
+  const letras=['A','B','C','D','E','F'];
+  let corpo='';
+  if(d.tipo==='mc'){
+    corpo = `<div id="opcoes">${d.opcoes.map((o,i)=>
+      `<button class="opcao" onclick="responder(${i})"><span class="bolha">${letras[i]}</span><span>${o}</span></button>`).join('')}</div>`;
+  } else if(d.tipo==='multi'){
+    corpo = `<p class="ajuda">Dá para marcar mais de uma.</p><div id="opcoes">${d.opcoes.map((o,i)=>
+      `<button class="opcao" onclick="marcar(${i})"><span class="bolha">+</span><span>${o}</span></button>`).join('')}</div>
+      <button class="btn azul" id="conferir" onclick="conferirMulti()" disabled>Conferir ▸</button>`;
+  } else {
+    corpo = `<div id="opcoes">${d.itens.map((it,i)=>
+      `<button class="cena" onclick="ordenar(${i})"><span class="mini">${minis[it.m]}</span><span class="ordem">·</span><span>${it.t}</span></button>`).join('')}
+      <button class="btn azul" id="conferir" onclick="conferirOrdem()" disabled>Conferir ▸</button>`;
+  }
+  document.getElementById('area').innerHTML=`<div class="card">${artes[d.arte]}<h2>${d.titulo}</h2>${corpo}<div class="feedback" id="fb"></div>${CREDITOS}</div>`;
+}
+
+function acertou(d){
+  pontos+=d.pontos;
+  const p=document.getElementById('pontos');
+  p.textContent='⭐ '+pontos; p.classList.remove('pulo'); void p.offsetWidth; p.classList.add('pulo');
+  const fb=document.getElementById('fb');
+  fb.className='feedback acerto on';
+  fb.innerHTML=`<strong>Acertou! +${d.pontos} pontos</strong>${d.explica}
+    <button class="btn" onclick="proximo()">${atual+1<licao.desafios.length?'Próximo desafio ▸':'Ver meu resultado ▸'}</button>`;
+  fb.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function errou(d,limpar){
+  const fb=document.getElementById('fb');
+  fb.className='feedback dica on';
+  fb.innerHTML=`<strong>Quase lá!</strong>${d.dica}
+    <button class="btn ghost" onclick="${limpar}">Tentar de novo ↻</button>`;
+  fb.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+/* múltipla escolha */
+function responder(i){
+  const d=licao.desafios[atual], botoes=document.querySelectorAll('#opcoes .opcao');
+  if(i===d.certa){botoes.forEach(b=>b.disabled=true); botoes[i].classList.add('certa'); acertou(d);}
+  else {botoes[i].classList.add('errada'); errou(d,`limparMC(${i})`);}
+}
+function limparMC(i){
+  document.querySelectorAll('#opcoes .opcao')[i].classList.remove('errada');
+  document.getElementById('fb').className='feedback';
+}
+
+/* seleção múltipla */
+function marcar(i){
+  const b=document.querySelectorAll('#opcoes .opcao')[i];
+  const pos=escolhaMulti.indexOf(i);
+  if(pos>=0){escolhaMulti.splice(pos,1);b.classList.remove('marcada');b.querySelector('.bolha').textContent='+';}
+  else{escolhaMulti.push(i);b.classList.add('marcada');b.querySelector('.bolha').textContent='✓';}
+  document.getElementById('conferir').disabled = escolhaMulti.length===0;
+  document.getElementById('fb').className='feedback';
+}
+function conferirMulti(){
+  const d=licao.desafios[atual];
+  const a=[...escolhaMulti].sort().join(','), b=[...d.certas].sort().join(',');
+  const botoes=document.querySelectorAll('#opcoes .opcao');
+  if(a===b){botoes.forEach(x=>x.disabled=true); d.certas.forEach(i=>botoes[i].classList.add('certa'));
+    document.getElementById('conferir').style.display='none'; acertou(d);}
+  else{errou(d,'limparMulti()');}
+}
+function limparMulti(){
+  escolhaMulti=[];
+  document.querySelectorAll('#opcoes .opcao').forEach(b=>{b.classList.remove('marcada','errada');b.querySelector('.bolha').textContent='+';});
+  document.getElementById('conferir').disabled=true;
+  document.getElementById('fb').className='feedback';
+}
+
+/* ordenação de cenas */
+function ordenar(i){
+  const cenas=document.querySelectorAll('#opcoes .cena');
+  if(escolhaOrdem.includes(i)) return;
+  escolhaOrdem.push(i);
+  cenas[i].classList.add('escolhida');
+  cenas[i].querySelector('.ordem').textContent=escolhaOrdem.length;
+  document.getElementById('conferir').disabled = escolhaOrdem.length!==cenas.length;
+}
+function conferirOrdem(){
+  const d=licao.desafios[atual], cenas=document.querySelectorAll('#opcoes .cena');
+  const certo = escolhaOrdem.every((v,k)=>v===d.ordem[k]);
+  if(certo){cenas.forEach(c=>{c.disabled=true;c.classList.remove('escolhida');c.classList.add('certa');});
+    document.getElementById('conferir').style.display='none'; acertou(d);}
+  else{
+    escolhaOrdem.forEach((v,k)=>{if(v!==d.ordem[k])cenas[v].classList.add('errada');});
+    errou(d,'limparOrdem()');
+  }
+}
+function limparOrdem(){
+  escolhaOrdem=[];
+  document.querySelectorAll('#opcoes .cena').forEach(c=>{c.classList.remove('escolhida','errada');c.querySelector('.ordem').textContent='·';});
+  document.getElementById('conferir').disabled=true;
+  document.getElementById('fb').className='feedback';
+}
+
+/* avanço e final */
+function proximo(){
+  atual++;
+  if(atual<licao.desafios.length){montar();window.scrollTo(0,0);}
+  else{
+    document.getElementById('barra').style.width='100%';
+    const antes=dados.licoes[licao.n];
+    if(!antes || pontos>antes.pontos) dados.licoes[licao.n]={pontos:pontos,data:new Date().toISOString().slice(0,10)};
+    salvar();
+    document.getElementById('final-pontos').textContent=pontos;
+    document.getElementById('final-titulo').textContent = dados.nome?`Muito bem, ${dados.nome}!`:'Muito bem!';
+    document.getElementById('final-versiculo').innerHTML=`${licao.versiculo}<b>${licao.ref}</b>`;
+    abrir('tela-final');
+  }
+}
+function zerar(){
+  dados={nome:dados.nome,licoes:{}}; salvar(); desenharPassaporte();
+}
+document.getElementById('marca-capa').innerHTML=LOGO;
+document.getElementById('marca-licao').innerHTML=LOGO_TOPO;
+['creditos-capa','creditos-passaporte','creditos-final'].forEach(id=>{document.getElementById(id).innerHTML=CREDITOS;});
+if(dados.nome) document.getElementById('nome').value=dados.nome;
+if('serviceWorker' in navigator && location.protocol.startsWith('http')){
+  window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+}
+</script>
+</body>
+</html>
