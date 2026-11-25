@@ -1,6 +1,8 @@
 # Encontrando com Deus — Primários 1A
 
-Aplicativo gamificado da Escola Bíblica Dominical para crianças de 7 e 8 anos. 1º módulo: 13 lições, 130 desafios, 2.015 pontos.
+Aplicativo gamificado da Escola Bíblica Dominical para crianças de 7 e 8 anos.
+
+**Esta é a versão de demonstração, com as 3 primeiras lições liberadas.** O 1º módulo completo tem 13 lições, 130 desafios e 2.015 pontos, e vem com o guia de aplicação do professor e o aplicativo para instalar na igreja. Professores e igrejas sem condição de pagar podem pedir cortesia à Studio Zaik.
 
 **Abrir o app:** https://zaik1966.github.io/ebd-primarios-1a/
 
