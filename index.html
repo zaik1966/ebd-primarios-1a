@@ -672,7 +672,10 @@ function desenharPassaporte(){
 }
 
 /* ===================== MOTOR DA LIÇÃO ===================== */
-let licao=null, atual=0, pontos=0, escolhaOrdem=[], escolhaMulti=[];
+/* embaralha alternativas e cenas a cada abertura do desafio */
+function baralho(n){const a=[...Array(n).keys()];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+let licao=null, atual=0, pontos=0, escolhaOrdem=[], escolhaMulti=[], mapa=[];
 
 function iniciar(n){
   licao=licoes.find(l=>l.n===n); atual=0; pontos=0;
@@ -689,16 +692,21 @@ function montar(){
   document.getElementById('barra').style.width=(atual/licao.desafios.length*100)+'%';
   const letras=['A','B','C','D','E','F'];
   let corpo='';
-  if(d.tipo==='mc'){
-    corpo = `<div id="opcoes">${d.opcoes.map((o,i)=>
-      `<button class="opcao" onclick="responder(${i})"><span class="bolha">${letras[i]}</span><span>${o}</span></button>`).join('')}</div>`;
-  } else if(d.tipo==='multi'){
-    corpo = `<p class="ajuda">Dá para marcar mais de uma.</p><div id="opcoes">${d.opcoes.map((o,i)=>
-      `<button class="opcao" onclick="marcar(${i})"><span class="bolha">+</span><span>${o}</span></button>`).join('')}</div>
-      <button class="btn azul" id="conferir" onclick="conferirMulti()" disabled>Conferir ▸</button>`;
+  if(d.tipo==='mc'||d.tipo==='multi'){
+    mapa=baralho(d.opcoes.length);
+    const itens=mapa.map((orig,pos)=>({orig,texto:d.opcoes[orig],pos}));
+    if(d.tipo==='mc'){
+      corpo = `<div id="opcoes">${itens.map(o=>
+        `<button class="opcao" onclick="responder(${o.pos})"><span class="bolha">${letras[o.pos]}</span><span>${o.texto}</span></button>`).join('')}</div>`;
+    } else {
+      corpo = `<p class="ajuda">Dá para marcar mais de uma.</p><div id="opcoes">${itens.map(o=>
+        `<button class="opcao" onclick="marcar(${o.pos})"><span class="bolha">+</span><span>${o.texto}</span></button>`).join('')}</div>
+        <button class="btn azul" id="conferir" onclick="conferirMulti()" disabled>Conferir ▸</button>`;
+    }
   } else {
-    corpo = `<div id="opcoes">${d.itens.map((it,i)=>
-      `<button class="cena" onclick="ordenar(${i})"><span class="mini">${minis[it.m]}</span><span class="ordem">·</span><span>${it.t}</span></button>`).join('')}
+    mapa=baralho(d.itens.length);
+    corpo = `<div id="opcoes">${mapa.map((orig,pos)=>
+      `<button class="cena" onclick="ordenar(${pos})"><span class="mini">${minis[d.itens[orig].m]}</span><span class="ordem">·</span><span>${d.itens[orig].t}</span></button>`).join('')}
       <button class="btn azul" id="conferir" onclick="conferirOrdem()" disabled>Conferir ▸</button>`;
   }
   document.getElementById('area').innerHTML=`<div class="card">${artes[d.arte]}<h2>${d.titulo}</h2>${corpo}<div class="feedback" id="fb"></div>${CREDITOS}</div>`;
@@ -725,7 +733,7 @@ function errou(d,limpar){
 /* múltipla escolha */
 function responder(i){
   const d=licao.desafios[atual], botoes=document.querySelectorAll('#opcoes .opcao');
-  if(i===d.certa){botoes.forEach(b=>b.disabled=true); botoes[i].classList.add('certa'); acertou(d);}
+  if(mapa[i]===d.certa){botoes.forEach(b=>b.disabled=true); botoes[i].classList.add('certa'); acertou(d);}
   else {botoes[i].classList.add('errada'); errou(d,`limparMC(${i})`);}
 }
 function limparMC(i){
@@ -744,9 +752,9 @@ function marcar(i){
 }
 function conferirMulti(){
   const d=licao.desafios[atual];
-  const a=[...escolhaMulti].sort().join(','), b=[...d.certas].sort().join(',');
+  const a=escolhaMulti.map(i=>mapa[i]).sort((x,y)=>x-y).join(','), b=[...d.certas].sort((x,y)=>x-y).join(',');
   const botoes=document.querySelectorAll('#opcoes .opcao');
-  if(a===b){botoes.forEach(x=>x.disabled=true); d.certas.forEach(i=>botoes[i].classList.add('certa'));
+  if(a===b){botoes.forEach(x=>x.disabled=true); escolhaMulti.forEach(i=>botoes[i].classList.add('certa'));
     document.getElementById('conferir').style.display='none'; acertou(d);}
   else{errou(d,'limparMulti()');}
 }
@@ -768,11 +776,11 @@ function ordenar(i){
 }
 function conferirOrdem(){
   const d=licao.desafios[atual], cenas=document.querySelectorAll('#opcoes .cena');
-  const certo = escolhaOrdem.every((v,k)=>v===d.ordem[k]);
+  const certo = escolhaOrdem.every((v,k)=>mapa[v]===d.ordem[k]);
   if(certo){cenas.forEach(c=>{c.disabled=true;c.classList.remove('escolhida');c.classList.add('certa');});
     document.getElementById('conferir').style.display='none'; acertou(d);}
   else{
-    escolhaOrdem.forEach((v,k)=>{if(v!==d.ordem[k])cenas[v].classList.add('errada');});
+    escolhaOrdem.forEach((v,k)=>{if(mapa[v]!==d.ordem[k])cenas[v].classList.add('errada');});
     errou(d,'limparOrdem()');
   }
 }
