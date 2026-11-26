@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>Encontrando com Deus — Primários 1A (demonstração)</title>
+<title>Vem Cá Kids — Passaporte Bíblico (demonstração)</title>
 <link rel="manifest" href="./manifest.webmanifest">
 <meta name="theme-color" content="#1f7ab5">
 <link rel="apple-touch-icon" href="./icone-192.png">
@@ -95,8 +95,8 @@
   <div class="card" style="text-align:center;padding:20px 18px 24px;border-radius:28px">
     <div id="marca-capa"></div>
     <span class="selo">1º MÓDULO · DEMONSTRAÇÃO · 7 e 8 ANOS</span>
-    <h1 style="font-size:2rem;line-height:1.05;margin:12px 0 4px;color:var(--azul-esc)">Encontrando<br>com Deus</h1>
-    <p style="margin:0 0 10px;color:#5b6b76;font-weight:600">Uma aventura missionária pela Bíblia</p>
+    <h1 style="font-size:2rem;line-height:1.05;margin:12px 0 4px;color:var(--azul-esc)">Passaporte<br>Bíblico</h1>
+    <p style="margin:0 0 10px;color:#5b6b76;font-weight:600">Do começo de tudo até a manhã da ressurreição</p>
     <svg viewBox="0 0 320 190" role="img" aria-label="Jardim colorido com árvore, rio e animais">
       <defs><linearGradient id="ceu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fd8ff"/><stop offset="1" stop-color="#d9f3ff"/></linearGradient></defs>
       <rect width="320" height="140" fill="url(#ceu)" rx="18"/>
@@ -127,14 +127,14 @@
     <span class="pontos" id="pontos-total">⭐ 0</span>
   </div>
   <div class="card" style="padding:16px">
-    <p style="margin:0 0 2px;font-weight:700;color:var(--azul-esc);font-family:'Baloo 2';font-size:1.15rem">Meu passaporte da Escola Dominical</p>
-    <p class="ajuda">A cada lição concluída você ganha um carimbo de missão.</p>
+    <p style="margin:0 0 2px;font-weight:700;color:var(--azul-esc);font-family:'Baloo 2';font-size:1.15rem">Meu Passaporte Bíblico</p>
+    <p class="ajuda">A cada lição concluída você ganha um carimbo no passaporte.</p>
     <p class="ajuda" style="color:#145a87"><strong>Versão de demonstração:</strong> as três primeiras lições estão liberadas. O módulo completo tem 13 lições.</p>
     <div class="passaporte" id="passaporte"></div>
   </div>
   <div class="card" style="text-align:center">
     <h2 style="font-family:'Baloo 2';color:#145a87;font-size:1.2rem;margin:0 0 4px">Quer o módulo completo?</h2>
-    <p class="ajuda" style="margin-bottom:8px">As 13 lições do 1º módulo, o guia de aplicação do professor e o aplicativo para instalar na igreja.</p>
+    <p class="ajuda" style="margin-bottom:8px">As 13 lições do 1º módulo, da criação do mundo à manhã da ressurreição, com o guia do professor e o aplicativo para instalar na igreja.</p>
     <p class="ajuda" style="color:#145a87"><strong>Fale com a Studio Zaik.</strong> Professores e igrejas sem condição de pagar podem pedir cortesia.</p>
   </div>
   <button class="btn ghost" onclick="zerar()">Começar tudo de novo ↻</button>
@@ -261,6 +261,13 @@ const artes = {
   <circle cx="150" cy="48" r="13" fill="#f3c79b"/><rect x="136" y="62" width="28" height="30" rx="11" fill="#fff"/>
   <g fill="#ffd95e"><path d="M150 12 l3 7 8 1 -6 5 2 8 -7-4 -7 4 2-8 -6-5 8-1z"/><circle cx="62" cy="34" r="6"/><circle cx="240" cy="30" r="5"/></g></svg>`
 ,
+ muralha:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#ffe9c9"/>
+  <path d="M0 94 Q80 88 160 98 T300 92 L300 110 L0 110Z" fill="#e8c88a"/>
+  <g fill="#c89b5e" stroke="#8a5a2b" stroke-width="3"><rect x="60" y="48" width="180" height="46"/>
+   <rect x="60" y="38" width="22" height="12"/><rect x="100" y="38" width="22" height="12"/>
+   <rect x="140" y="38" width="22" height="12"/><rect x="180" y="38" width="22" height="12"/><rect x="218" y="38" width="22" height="12"/></g>
+  <g stroke="#8a5a2b" stroke-width="2"><path d="M60 66h180"/><path d="M60 80h180"/></g>
+  <circle cx="264" cy="26" r="12" fill="#ffd95e"/></svg>`,
  sarca:`<svg viewBox="0 0 300 110" aria-hidden="true"><rect width="300" height="110" rx="16" fill="#ffe3bf"/>
   <path d="M0 90 Q80 82 160 94 T300 88 L300 110 L0 110Z" fill="#e8c88a"/>
   <g fill="#3fa34d"><circle cx="150" cy="78" r="16"/><circle cx="132" cy="84" r="11"/><circle cx="168" cy="84" r="11"/></g>
@@ -420,6 +427,17 @@ const artes = {
   <path d="M0 94 Q80 84 160 96 T300 90 L300 110 L0 110Z" fill="#6cc46f"/></svg>`
 };
 const minis = {
+ k1:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#1b2a4a"/><circle cx="40" cy="26" r="13" fill="#ffd95e"/><g stroke="#ffc531" stroke-width="3" stroke-linecap="round"><path d="M40 4v6"/><path d="M40 44v6"/><path d="M14 26h6"/><path d="M60 26h6"/></g></svg>`,
+ k2:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#bfe6ff"/><path d="M0 30 q20-6 40 0 t40 0v10H0z" fill="#2f8fc4"/><path d="M0 42 q40-8 80 0v12H0z" fill="#6cc46f"/></svg>`,
+ k3:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#f2fbe9"/><ellipse cx="26" cy="32" rx="12" ry="8" fill="#f0a04b"/><circle cx="38" cy="26" r="6" fill="#f0a04b"/><circle cx="58" cy="24" r="7" fill="#f3c79b"/><rect x="52" y="32" width="12" height="12" rx="5" fill="#4fb3e8"/></svg>`,
+ k4:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#fff6e0"/><circle cx="40" cy="26" r="14" fill="#ffe9a8"/><path d="M26 26a14 14 0 0 0 28 0z" fill="#ffc531"/></svg>`,
+ k5:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#eaf6ff"/><g fill="none" stroke-width="4" stroke-linecap="round"><path d="M16 44a24 24 0 0 1 48 0" stroke="#e35d5b"/><path d="M24 44a16 16 0 0 1 32 0" stroke="#ffc531"/><path d="M32 44a8 8 0 0 1 16 0" stroke="#3fa34d"/></g></svg>`,
+ k6:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#fff0f6"/><circle cx="40" cy="24" r="9" fill="#f3c79b"/><path d="M28 44q12-10 24 0z" fill="#9ed7f0"/><circle cx="62" cy="14" r="4" fill="#ffd95e"/></svg>`,
+ k7:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#ffe9c9"/><g fill="#c89b5e" stroke="#8a5a2b" stroke-width="2"><rect x="14" y="34" width="14" height="12" transform="rotate(-12 21 40)"/><rect x="34" y="36" width="14" height="10"/><rect x="54" y="32" width="14" height="14" transform="rotate(14 61 39)"/></g></svg>`,
+ k8:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#fff3d0"/><g stroke="#c9922f" stroke-width="3" stroke-linecap="round"><path d="M28 46V22"/><path d="M48 46V18"/></g><ellipse cx="28" cy="18" rx="5" ry="9" fill="#ffc531"/><ellipse cx="48" cy="14" rx="5" ry="9" fill="#ffc531"/></svg>`,
+ k9:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#eaf1ff"/><circle cx="30" cy="24" r="9" fill="#f3c79b"/><path d="M40 28l16-6" stroke="#8a5a2b" stroke-width="3" stroke-linecap="round"/><circle cx="60" cy="20" r="5" fill="#9aa7b0"/></svg>`,
+ k10:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#cfd8e0"/><circle cx="40" cy="28" r="13" fill="#f0a04b"/><circle cx="40" cy="28" r="8" fill="#ffd9a8"/><circle cx="35" cy="26" r="1.8" fill="#333"/><circle cx="45" cy="26" r="1.8" fill="#333"/><path d="M36 33q4 3 8 0" stroke="#8a5a2b" stroke-width="2" fill="none"/></svg>`,
+ k11:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#fff8df"/><path d="M20 40h40l-6 8H26z" fill="#c89b5e" stroke="#8a5a2b" stroke-width="2"/><ellipse cx="40" cy="36" rx="12" ry="7" fill="#fff6d0"/><circle cx="40" cy="34" r="5" fill="#f3c79b"/><path d="M40 10l2 6 6 1-4 4 1 6-5-3-5 3 1-6-4-4 6-1z" fill="#ffd95e"/></svg>`,
  n1:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#e8ecf2"/><ellipse cx="40" cy="18" rx="26" ry="10" fill="#9db6c8"/><g stroke="#6f8599" stroke-width="3" stroke-linecap="round"><path d="M26 30l-3 8"/><path d="M40 30l-3 8"/><path d="M54 30l-3 8"/></g></svg>`,
  n2:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#fff3cf"/><circle cx="40" cy="20" r="11" fill="#ffc531"/><circle cx="40" cy="40" r="7" fill="#f3c79b"/></svg>`,
  n3:`<svg viewBox="0 0 80 54" aria-hidden="true"><rect width="80" height="54" rx="10" fill="#fff3e0"/><path d="M16 26 h48 l-6 14 h-36z" fill="#c89b5e" stroke="#8a5a2b" stroke-width="3"/><rect x="28" y="14" width="24" height="12" rx="3" fill="#e0b476" stroke="#8a5a2b" stroke-width="3"/></svg>`,
@@ -476,163 +494,163 @@ const minis = {
 
 /* ===================== LIÇÕES ===================== */
 const licoes = [
-  { n:1, titulo:'O primeiro encontro na Bíblia',
-    versiculo:'“Pois o salário do pecado é a morte, mas o presente gratuito de Deus é a vida eterna.”',
-    ref:'Romanos 6.23a — Nova Almeida Atualizada (SBB)',
+  { n:1, titulo:'No princípio, Deus criou',
+    versiculo:'“No princípio criou Deus os céus e a terra.”',
+    ref:'Gênesis 1.1 — Almeida, domínio público',
     desafios:[
-      {tipo:'mc',arte:'jardim',titulo:'Onde Deus colocou o homem e a mulher para cuidar da criação?',
-       opcoes:['No Jardim do Éden','Dentro de um barco','No alto de uma montanha'],certa:0,pontos:10,
-       explica:'Isso mesmo! Deus colocou Adão e Eva no Jardim do Éden para cuidar dos animais e da natureza.',
-       dica:'Era um jardim muito especial, com um nome que começa com a letra É.'},
-      {tipo:'mc',arte:'livro',titulo:'Em qual livro da Bíblia está o primeiro encontro com Deus?',
-       opcoes:['Salmos','Gênesis, o livro do começo','Apocalipse'],certa:1,pontos:10,
-       explica:'Certo! Gênesis é o primeiro livro da Bíblia e conta como tudo começou.',
-       dica:'A revista chama esse livro de "livro do começo".'},
-      {tipo:'mc',arte:'amigos',titulo:'Para que Deus criou o ser humano?',
-       opcoes:['Para viver sozinho','Para ser amigo dEle e viver em comunhão','Para nunca falar com Ele'],certa:1,pontos:10,
-       explica:'Muito bem! Deus nos criou para ter um relacionamento com Ele, como amigos que conversam todos os dias.',
-       dica:'Pense por que Deus ia ao jardim conversar com eles todos os dias.'},
-      {tipo:'mc',arte:'sol',titulo:'Verdadeiro ou falso: o Senhor nunca se encontrava com Adão e Eva.',
-       opcoes:['Verdadeiro','Falso'],certa:1,pontos:10,
-       explica:'Falso! Deus se encontrava com eles todos os dias, como um amigo que vem visitar.',
-       dica:'Antes do pecado eles viviam em comunhão com Deus. Será que Ele ficava longe?'},
-      {tipo:'mc',arte:'arvore',titulo:'Qual era a única coisa que Deus proibiu no jardim?',
-       opcoes:['Tomar água do rio','Comer da fruta da árvore do meio do jardim','Brincar com os animais'],certa:1,pontos:15,
-       explica:'Exato. Era só uma proibição: não comer nem tocar na fruta daquela árvore, para que eles não morressem.',
-       dica:'A árvore ficava bem no meio do jardim.'},
-      {tipo:'mc',arte:'fruta',titulo:'O que a serpente fez no jardim?',
-       opcoes:['Plantou uma árvore nova','Enganou Adão e Eva para duvidarem de Deus','Ajudou a cuidar dos animais'],certa:1,pontos:15,
-       explica:'Certo! A serpente enganou os dois, e eles comeram do fruto que Deus havia proibido.',
-       dica:'Pense no que aconteceu logo antes de eles comerem o fruto.'},
-      {tipo:'mc',arte:'folhas',titulo:'O que Adão e Eva fizeram assim que comeram o fruto?',
-       opcoes:['Perceberam que estavam nus e fizeram vestes de folhas','Foram correndo contar para Deus','Plantaram outra árvore'],certa:0,pontos:15,
-       explica:'Isso! Eles se sentiram diferentes, perceberam que estavam nus e fizeram roupas com folhas de figueira.',
-       dica:'Eles usaram folhas de uma planta para se cobrir.'},
-      {tipo:'mc',arte:'dedo',titulo:'Quando Deus perguntou sobre o fruto, o que Adão fez?',
-       opcoes:['Assumiu o erro na mesma hora','Colocou a culpa em Eva','Ficou calado e foi dormir'],certa:1,pontos:20,
-       explica:'Exato. Adão culpou Eva, e Eva culpou a serpente. Mas colocar a culpa nos outros não resolve nada.',
-       dica:'Adão não quis assumir sozinho. Ele apontou para outra pessoa.'},
-      {tipo:'ordem',arte:'portao',titulo:'Coloque a história na ordem certa. Toque nas cenas do começo ao fim.',
-       itens:[{t:'Deus colocou Adão e Eva no jardim',m:'c1'},{t:'Eles comeram o fruto proibido',m:'c2'},
-              {t:'Eles se esconderam de Deus',m:'c3'},{t:'Eles saíram do Jardim do Éden',m:'c4'}],
+      {tipo:'mc',arte:'estrelas',titulo:'Como a Bíblia começa?',
+       opcoes:['“No princípio criou Deus os céus e a terra”','“Era uma vez um jardim”','“Depois de muitos anos”'],certa:0,pontos:10,
+       explica:'Isso mesmo! É a primeira frase da Bíblia inteira, no livro de Gênesis.',
+       dica:'São as primeiras palavras do primeiro livro. Falam de um começo e de quem criou tudo.'},
+      {tipo:'mc',arte:'sol',titulo:'O que Deus criou no primeiro dia?',
+       opcoes:['A luz','Os peixes','As estrelas'],certa:0,pontos:10,
+       explica:'Certo! Deus disse “Haja luz”, e separou a luz da escuridão: ficou o dia e ficou a noite.',
+       dica:'Antes dela tudo era escuro. Deus falou e ela apareceu.'},
+      {tipo:'mc',arte:'mar',titulo:'Como Deus criava cada coisa?',
+       opcoes:['Falando','Cavando com as mãos','Pedindo ajuda aos anjos'],certa:0,pontos:10,
+       explica:'Muito bem! A Bíblia repete: “E disse Deus”. A palavra dEle tem poder de criar.',
+       dica:'A Bíblia repete uma expressão a cada dia da criação, e ela começa com “E disse”.'},
+      {tipo:'mc',arte:'sol',titulo:'O que Deus colocou no céu para separar o dia da noite?',
+       opcoes:['O sol, a lua e as estrelas','Um relógio','Uma cortina'],certa:0,pontos:10,
+       explica:'Exato! O sol para governar o dia, e a lua com as estrelas para a noite.',
+       dica:'Olhe para cima de dia e de noite: são três coisas que Deus pôs lá.'},
+      {tipo:'mc',arte:'animais',titulo:'Em que dia Deus criou os animais da terra e as pessoas?',
+       opcoes:['No terceiro dia','No sexto dia','No sétimo dia'],certa:1,pontos:15,
+       explica:'Isso! No sexto dia vieram os animais da terra e, por último, o ser humano.',
+       dica:'Foi no último dia de trabalho, bem antes do dia de descanso.'},
+      {tipo:'mc',arte:'amigos',titulo:'A Bíblia diz que Deus criou o ser humano...',
+       opcoes:['à sua imagem e semelhança','por acidente','igual aos outros animais'],certa:0,pontos:15,
+       explica:'Certo! Por isso cada pessoa tem valor: homem e mulher foram criados à imagem de Deus.',
+       dica:'A expressão aparece em Gênesis 1.27 e fala de parecer com Deus.'},
+      {tipo:'mc',arte:'folhas',titulo:'O que Deus falou sobre tudo o que tinha criado?',
+       opcoes:['Que era muito bom','Que estava faltando coisa','Que era perigoso'],certa:0,pontos:15,
+       explica:'Muito bem! “E viu Deus tudo quanto tinha feito, e eis que era muito bom.”',
+       dica:'Deus olhou para tudo e aprovou com duas palavras bem positivas.'},
+      {tipo:'mc',arte:'arvore',titulo:'O que aconteceu no sétimo dia?',
+       opcoes:['Deus descansou e abençoou aquele dia','Deus criou os dinossauros','Começou a chover'],certa:0,pontos:20,
+       explica:'Isso mesmo! Deus descansou da sua obra e santificou o sétimo dia. Descansar também é coisa de Deus.',
+       dica:'Não foi um dia de criar, foi um dia de parar.'},
+      {tipo:'ordem',arte:'estrelas',titulo:'Coloque a criação na ordem certa. Toque nas cenas do começo ao fim.',
+       itens:[{t:'Deus criou a luz',m:'k1'},{t:'Deus separou o céu, o mar e a terra seca',m:'k2'},
+              {t:'Deus criou os animais e as pessoas',m:'k3'},{t:'Deus descansou no sétimo dia',m:'k4'}],
        ordem:[0,1,2,3],pontos:25,
-       explica:'Perfeito! Primeiro a amizade no jardim, depois a desobediência, o esconderijo e, por fim, a saída do Éden.',
-       dica:'Comece pelo tempo em que tudo estava bem, antes da desobediência.'},
-      {tipo:'multi',arte:'coracao',titulo:'Marque tudo o que devemos fazer quando pecamos.',
-       opcoes:['Se esconder','Confessar','Mentir','Pedir perdão','Assumir o erro','Culpar o colega'],
-       certas:[1,3,4],pontos:25,
-       explica:'Muito bem! Confessar, pedir perdão e assumir o erro é o caminho que nos aproxima de Deus de novo.',
-       dica:'Adão se escondeu e culpou alguém, e não deu certo. Escolha as três atitudes sinceras.'}
-    ]
-  },
-  { n:2, titulo:'Deus se encontra com Noé',
-    versiculo:'“[...] não deixes que eu me desvie dos teus mandamentos. Guardo a tua palavra no meu coração para não pecar contra ti.”',
-    ref:'Salmos 119.10,11 — Nova Almeida Atualizada (SBB)',
-    desafios:[
-      {tipo:'mc',arte:'triste',titulo:'Por que o coração de Deus ficou triste nos dias de Noé?',
-       opcoes:['Porque as pessoas faziam muitas maldades','Porque ninguém plantava árvores','Porque fazia muito calor'],certa:0,pontos:10,
-       explica:'Isso mesmo. As pessoas não se importavam com a vontade de Deus e nem em separar o certo do errado.',
-       dica:'A Terra estava cheia de pecado e violência. O que deixou Deus triste foi o jeito das pessoas.'},
-      {tipo:'mc',arte:'sol',titulo:'Quem era o homem que fazia o que era correto e se desviava do mal?',
-       opcoes:['Abraão','Noé','Moisés'],certa:1,pontos:10,
-       explica:'Certo! Noé era temente a Deus e por isso o Senhor teve um encontro com ele.',
-       dica:'É o nome que dá título à lição de hoje.'},
-      {tipo:'mc',arte:'amigos',titulo:'Quais eram os nomes dos três filhos de Noé?',
-       opcoes:['Pedro, Tiago e João','Sem, Cam e Jafé','Caim, Abel e Sete'],certa:1,pontos:10,
-       explica:'Muito bem! Sem, Cam e Jafé entraram na barca junto com Noé.',
-       dica:'Os três nomes aparecem em Gênesis 6.9 e nenhum deles é de apóstolo.'},
-      {tipo:'mc',arte:'arca',titulo:'Que missão Deus deu a Noé naquele encontro?',
-       opcoes:['Construir uma grande barca','Plantar um pomar','Cavar um poço'],certa:0,pontos:10,
-       explica:'Exato. Noé obedeceu e construiu a barca exatamente como Deus mandou.',
-       dica:'Era algo que ia flutuar quando a água chegasse.'},
-      {tipo:'mc',arte:'martelo',titulo:'Quantos andares a barca deveria ter?',
-       opcoes:['Um','Três','Dez'],certa:1,pontos:15,
-       explica:'Isso! Três andares, grandes o bastante para a família de Noé e os casais de animais.',
-       dica:'É o mesmo número de filhos que Noé tinha.'},
-      {tipo:'mc',arte:'arca',titulo:'Com que material os buracos da barca foram tapados?',
-       opcoes:['Com piche, que funcionava como cola','Com areia','Com folhas de figueira'],certa:0,pontos:15,
-       explica:'Certo! O piche vedava tudo para a água não entrar na barca.',
-       dica:'Era um material escuro e grudento, usado como cola naquele tempo.'},
-      {tipo:'mc',arte:'chuva',titulo:'Verdadeiro ou falso: as pessoas acreditaram em Noé e se arrependeram.',
-       opcoes:['Verdadeiro','Falso'],certa:1,pontos:15,
-       explica:'Falso. Elas nunca tinham visto uma chuva assim e trataram Noé como louco.',
-       dica:'Só a família de Noé entrou na barca. Isso mostra no que os outros acreditavam.'},
-      {tipo:'mc',arte:'animais',titulo:'Quem sobreviveu ao dilúvio?',
-       opcoes:['Todas as pessoas da Terra','Noé, sua família e os animais da barca','Apenas os animais'],certa:1,pontos:20,
-       explica:'Muito bem! Deus cumpriu a promessa do encontro e honrou a obediência de Noé.',
-       dica:'Pense em quem estava dentro da barca quando a chuva começou.'},
-      {tipo:'ordem',arte:'arcoiris',titulo:'Coloque a história na ordem certa. Toque nas cenas do começo ao fim.',
-       itens:[{t:'A Terra estava cheia de maldade',m:'n1'},{t:'Deus teve um encontro com Noé',m:'n2'},
-              {t:'Noé construiu a grande barca',m:'n3'},{t:'A chuva veio sobre a terra',m:'n4'}],
-       ordem:[0,1,2,3],pontos:25,
-       explica:'Perfeito! A maldade, o encontro com Deus, a obediência de Noé e, por último, o dilúvio.',
-       dica:'Comece pelo motivo da tristeza de Deus, bem antes da barca existir.'},
-      {tipo:'multi',arte:'coracao',titulo:'Marque tudo o que agrada a Deus, como fez Noé.',
-       opcoes:['Obedecer à Palavra de Deus','Fazer maldade escondido','Fazer o certo mesmo sozinho','Zombar de quem obedece','Guardar a Palavra no coração','Seguir os colegas que fazem o errado'],
+       explica:'Perfeito! Primeiro a luz, depois os lugares, depois os seres vivos e, por fim, o descanso.',
+       dica:'Comece pelo que Deus fez quando ainda estava tudo escuro.'},
+      {tipo:'multi',arte:'coracao',titulo:'Marque o que a história da criação nos ensina sobre Deus.',
+       opcoes:['Ele tem poder','Ele se cansou e desistiu','Ele cuida do que faz','Ele criou sem pensar','Ele acha a sua vida valiosa','Ele precisou de ajuda'],
        certas:[0,2,4],pontos:25,
-       explica:'Isso mesmo! Noé obedeceu, fez o certo mesmo cercado de gente errada, e Deus o protegeu.',
-       dica:'São as três atitudes que Noé teve. As outras três são o contrário delas.'}
+       explica:'Isso mesmo! Um Deus poderoso, caprichoso no cuidado, que fez você à imagem dEle.',
+       dica:'Três frases combinam com o Deus que fala e tudo aparece. As outras três diminuem Deus.'}
     ]
   },
-  { n:3, titulo:'O encontro de Deus com Abraão',
-    versiculo:'“Foi pela fé que Abraão, ao ser chamado por Deus, obedeceu e saiu para uma terra que Deus lhe prometeu dar.”',
-    ref:'Hebreus 11.8a — Nova Almeida Atualizada (SBB)',
+  { n:2, titulo:'A arca e o arco-íris',
+    versiculo:'“O meu arco tenho posto nas nuvens; e será por sinal do concerto entre mim e a terra.”',
+    ref:'Gênesis 9.13 — Almeida, domínio público',
     desafios:[
-      {tipo:'mc',arte:'estrada',titulo:'O que Deus pediu a Abraão naquele encontro?',
-       opcoes:['Que ficasse na casa do pai','Que saísse da sua terra e fosse para a terra que Ele mostraria','Que construísse uma cidade'],certa:1,pontos:10,
-       explica:'Isso mesmo. Deus mandou Abraão sair da sua terra, dos parentes e da casa do pai, rumo a uma terra nova.',
-       dica:'Era um pedido de partir, não de ficar.'},
-      {tipo:'mc',arte:'sol',titulo:'Abraão conhecia o lugar para onde estava indo?',
-       opcoes:['Sim, já tinha morado lá','Não, ele nem sabia como era a terra','Sim, era a casa do tio dele'],certa:1,pontos:10,
-       explica:'Certo! Ele atravessou o país rumo a uma terra que não conhecia, confiando em Deus.',
-       dica:'Deus disse que mostraria a terra depois. Então Abraão ainda não a tinha visto.'},
-      {tipo:'mc',arte:'amigos',titulo:'Qual era o grande sonho de Abraão?',
-       opcoes:['Ser papai','Ser rei','Ter muitos camelos'],certa:0,pontos:10,
-       explica:'Muito bem! Ele não tinha filhos e Deus prometeu que dele viria uma grande nação.',
-       dica:'A promessa de Deus falava de descendência, isto é, de filhos e netos.'},
-      {tipo:'mc',arte:'estrelas',titulo:'O que Deus prometeu fazer da descendência de Abraão?',
-       opcoes:['Uma grande nação que abençoaria todos os povos','Um exército para brigar','Uma cidade só de ouro'],certa:0,pontos:10,
-       explica:'Exato. Por meio dele, todas as nações da terra seriam abençoadas.',
-       dica:'A promessa era de bênção para muita gente, não de guerra.'},
-      {tipo:'mc',arte:'estrada',titulo:'Com quantos anos Abraão atendeu ao chamado do Senhor?',
-       opcoes:['Com vinte e cinco anos','Com setenta e cinco anos','Com cem anos'],certa:1,pontos:15,
-       explica:'Isso! Mesmo com setenta e cinco anos, o coração dele se encheu de fé e ele obedeceu.',
-       dica:'Ele já era bem idoso, e os três algarismos do número formam setenta e cinco.'},
-      {tipo:'mc',arte:'amigos',titulo:'Quem Abraão levou consigo na viagem?',
-       opcoes:['Ninguém, foi sozinho','A família, o sobrinho e as riquezas que tinha','Somente os animais'],certa:1,pontos:15,
-       explica:'Certo! Ele levou a família, o sobrinho e o que pôde das riquezas adquiridas em Harã.',
-       dica:'Era uma viagem de muita gente, não de uma pessoa só.'},
-      {tipo:'mc',arte:'coroa',titulo:'Qual grande nação nasceu da descendência de Abraão?',
-       opcoes:['Egito','Israel','Babilônia'],certa:1,pontos:15,
-       explica:'Muito bem! Israel, de onde vieram reis como Davi e, mais tarde, Jesus Cristo.',
-       dica:'É o nome do povo de Deus na Bíblia.'},
-      {tipo:'mc',arte:'cruz',titulo:'Verdadeiro ou falso: Abraão viu todas as promessas se cumprirem em vida.',
-       opcoes:['Verdadeiro','Falso'],certa:1,pontos:20,
-       explica:'Falso. Abraão não viu tudo acontecer, mas creu até o fim naquele que prometeu.',
-       dica:'A fé verdadeira crê mesmo sem ver. Isso foi o que Abraão viveu.'},
-      {tipo:'ordem',arte:'estrelas',titulo:'Coloque a história na ordem certa. Toque nas cenas do começo ao fim.',
-       itens:[{t:'Deus viu fé no coração de Abraão',m:'a1'},{t:'Deus fez grandes promessas a ele',m:'a2'},
-              {t:'Abraão partiu para a terra desconhecida',m:'a3'},{t:'De sua descendência nasceu Israel',m:'a4'}],
+      {tipo:'mc',arte:'triste',titulo:'Por que Deus decidiu enviar o dilúvio?',
+       opcoes:['Porque a maldade das pessoas era muito grande','Porque havia pouca água','Porque ninguém trabalhava'],certa:0,pontos:10,
+       explica:'Isso mesmo. A Bíblia diz que a terra estava cheia de violência, e isso entristeceu o coração de Deus.',
+       dica:'Tinha a ver com o jeito das pessoas, não com o clima.'},
+      {tipo:'mc',arte:'sol',titulo:'O que a Bíblia diz sobre Noé?',
+       opcoes:['Que ele achou graça diante do Senhor','Que ele era o mais rico','Que ele era o mais forte'],certa:0,pontos:10,
+       explica:'Certo! Noé era um homem justo, e andava com Deus.',
+       dica:'Não era sobre dinheiro nem força, era sobre a relação dele com Deus.'},
+      {tipo:'mc',arte:'martelo',titulo:'Que madeira Deus mandou usar na arca?',
+       opcoes:['Madeira de gofer','Madeira de pinho','Bambu'],certa:0,pontos:10,
+       explica:'Muito bem! Gofer, e tudo calafetado com betume por dentro e por fora, para a água não entrar.',
+       dica:'O nome aparece em Gênesis 6.14 e começa com a letra G.'},
+      {tipo:'mc',arte:'animais',titulo:'Quem entrou na arca?',
+       opcoes:['Noé, a família dele e os animais','Só os animais','A cidade inteira'],certa:0,pontos:10,
+       explica:'Exato. Noé, a mulher, os três filhos, as esposas deles e os animais que Deus mandou.',
+       dica:'Era a família de Noé e mais um monte de bichos.'},
+      {tipo:'mc',arte:'chuva',titulo:'Quantos dias e noites choveu?',
+       opcoes:['Sete','Quarenta','Cem'],certa:1,pontos:15,
+       explica:'Isso! Quarenta dias e quarenta noites de chuva sobre a terra.',
+       dica:'É o mesmo número de dias que Jesus passou no deserto, bem mais tarde.'},
+      {tipo:'mc',arte:'peixe',titulo:'Que ave Noé soltou e voltou com uma folha de oliveira?',
+       opcoes:['A pomba','O corvo','A águia'],certa:0,pontos:15,
+       explica:'Certo! A folha verdinha mostrou que as águas já estavam baixando.',
+       dica:'É a ave que até hoje é símbolo de paz.'},
+      {tipo:'mc',arte:'arcoiris',titulo:'O que Deus pôs nas nuvens como sinal da promessa?',
+       opcoes:['O arco-íris','Uma estrela','Uma nuvem de fogo'],certa:0,pontos:15,
+       explica:'Muito bem! Cada arco-íris lembra a promessa de Deus de não destruir mais a terra com um dilúvio.',
+       dica:'Aparece depois da chuva, cheio de cores.'},
+      {tipo:'mc',arte:'arca',titulo:'O que a obediência de Noé nos ensina?',
+       opcoes:['Que vale a pena obedecer a Deus mesmo quando ninguém acredita','Que é melhor seguir a maioria','Que obedecer é perda de tempo'],certa:0,pontos:20,
+       explica:'Isso mesmo! Noé construiu durante anos, sendo motivo de piada, e a obediência dele salvou a família.',
+       dica:'Noé ficou sozinho na decisão, e no fim deu certo. O que isso ensina?'},
+      {tipo:'ordem',arte:'arcoiris',titulo:'Coloque a história na ordem certa. Toque nas cenas do começo ao fim.',
+       itens:[{t:'Deus avisou Noé sobre o dilúvio',m:'n2'},{t:'Noé construiu a arca',m:'n3'},
+              {t:'Veio a chuva por quarenta dias',m:'n4'},{t:'Deus pôs o arco-íris nas nuvens',m:'k5'}],
        ordem:[0,1,2,3],pontos:25,
-       explica:'Perfeito! Deus viu a fé, fez a promessa, Abraão obedeceu e a promessa se cumpriu.',
-       dica:'Pense no que veio antes da viagem: primeiro Deus falou com ele.'},
-      {tipo:'multi',arte:'coracao',titulo:'Marque o que Abraão precisou ter para ver as promessas de Deus.',
-       opcoes:['Fé','Pressa','Coragem','Confiança','Teimosia','Medo de Deus falhar'],
-       certas:[0,2,3],pontos:25,
-       explica:'Isso mesmo! Fé, coragem e confiança, exatamente como aparece no exercício da revista.',
-       dica:'São as três palavras do exercício: uma de duas letras, uma de sete e uma de nove.'}
+       explica:'Perfeito! O aviso, a obediência, a chuva e a promessa colorida no céu.',
+       dica:'Comece pelo momento em que Deus conversou com Noé, antes de qualquer martelada.'},
+      {tipo:'multi',arte:'coracao',titulo:'Marque o que Noé fez e que também podemos fazer.',
+       opcoes:['Obedecer mesmo sem entender tudo','Fazer o que a maioria faz','Terminar o que começou','Desistir quando riem de nós','Confiar na promessa de Deus','Deixar para depois'],
+       certas:[0,2,4],pontos:25,
+       explica:'Muito bem! Obediência, persistência e confiança: foi assim que Noé atravessou o dilúvio.',
+       dica:'Três atitudes são de quem anda com Deus. As outras três são de quem desiste.'}
     ]
   },
-  {n:4,titulo:'Deus se encontra com Jacó',emBreve:true},
-  {n:5,titulo:'Deus fala com José em sonho',emBreve:true},
-  {n:6,titulo:'Deus se encontra com Moisés',emBreve:true},
-  {n:7,titulo:'O encontro de Deus com Samuel',emBreve:true},
-  {n:8,titulo:'Deus encontra Elias na caverna',emBreve:true},
-  {n:9,titulo:'Deus se encontra com Isaías',emBreve:true},
-  {n:10,titulo:'A fuga de Jonas após o encontro',emBreve:true},
-  {n:11,titulo:'O primeiro encontro com Jesus ressuscitado',emBreve:true},
-  {n:12,titulo:'O encontro que mudou a vida de Saulo',emBreve:true},
-  {n:13,titulo:'O encontro do Senhor com Estêvão',emBreve:true}
+  { n:3, titulo:'A promessa feita a Abraão',
+    versiculo:'“E creu ele no Senhor, e imputou-lhe isto por justiça.”',
+    ref:'Gênesis 15.6 — Almeida, domínio público',
+    desafios:[
+      {tipo:'mc',arte:'estrada',titulo:'O que Deus pediu a Abrão?',
+       opcoes:['Que saísse da sua terra e da casa do seu pai','Que construísse uma cidade','Que ficasse quieto onde estava'],certa:0,pontos:10,
+       explica:'Isso mesmo. Deus mandou que fosse para a terra que lhe mostraria.',
+       dica:'Era um convite para partir, deixando para trás o lugar conhecido.'},
+      {tipo:'mc',arte:'sol',titulo:'Abrão sabia para onde estava indo?',
+       opcoes:['Sim, tinha um mapa','Não, Deus mostraria no caminho','Sim, era a casa do irmão'],certa:1,pontos:10,
+       explica:'Certo! Ele partiu confiando, sem conhecer o destino. Isso é fé.',
+       dica:'Deus disse “a terra que eu te mostrarei”. Então ele ainda não sabia qual era.'},
+      {tipo:'mc',arte:'amigos',titulo:'Quem foi com ele na viagem?',
+       opcoes:['Sara, a esposa, e Ló, o sobrinho','Ninguém','Um exército'],certa:0,pontos:10,
+       explica:'Muito bem! Levaram também os bens e as pessoas que tinham na casa.',
+       dica:'Eram a esposa dele e um sobrinho.'},
+      {tipo:'mc',arte:'estrelas',titulo:'Como Deus ilustrou a promessa de muitos descendentes?',
+       opcoes:['Mandou contar as estrelas do céu','Mostrou um rio','Desenhou na areia'],certa:0,pontos:10,
+       explica:'Exato. “Olha agora para os céus e conta as estrelas”. Assim seria a descendência dele.',
+       dica:'Aconteceu à noite, olhando para cima.'},
+      {tipo:'mc',arte:'triste',titulo:'Qual era a dificuldade de acreditar nessa promessa?',
+       opcoes:['Abrão e Sara eram idosos e não tinham filhos','Eles moravam longe','Eles não tinham dinheiro'],certa:0,pontos:15,
+       explica:'Isso! Humanamente era impossível, e mesmo assim Abrão creu no Senhor.',
+       dica:'A promessa era de filhos, e o casal tinha um problema justamente com isso.'},
+      {tipo:'mc',arte:'amigos',titulo:'Qual é o nome do filho da promessa?',
+       opcoes:['Isaque','Jacó','Moisés'],certa:0,pontos:15,
+       explica:'Certo! Isaque nasceu quando Abraão já era bem velho, no tempo que Deus marcou.',
+       dica:'O nome tem a ver com riso, porque Sara riu quando ouviu a notícia.'},
+      {tipo:'mc',arte:'sol',titulo:'Que novo nome Abrão recebeu?',
+       opcoes:['Abraão, pai de muitas nações','Israel','Pedro'],certa:0,pontos:15,
+       explica:'Muito bem! Deus mudou o nome dele antes mesmo do filho nascer.',
+       dica:'É quase igual ao antigo, só que com uma letra a mais.'},
+      {tipo:'mc',arte:'coracao',titulo:'O que significa dizer que a fé de Abraão lhe foi imputada por justiça?',
+       opcoes:['Que Deus o aceitou por causa da confiança dele, não por ser perfeito','Que ele nunca errou','Que ele pagou um preço alto'],certa:0,pontos:20,
+       explica:'Isso mesmo! Abraão também errou, mas confiou em Deus, e foi isso que Deus valorizou.',
+       dica:'Pense no que Deus olhou: as falhas dele ou a confiança dele?'},
+      {tipo:'ordem',arte:'estrelas',titulo:'Coloque a história na ordem certa. Toque nas cenas do começo ao fim.',
+       itens:[{t:'Deus chamou Abrão para sair da sua terra',m:'a1'},{t:'Ele partiu sem saber o destino',m:'a3'},
+              {t:'Deus mostrou as estrelas e prometeu descendentes',m:'a2'},{t:'Isaque, o filho da promessa, nasceu',m:'k6'}],
+       ordem:[0,1,2,3],pontos:25,
+       explica:'Perfeito! O chamado, a partida, a promessa debaixo das estrelas e o cumprimento.',
+       dica:'Comece pelo momento em que Deus falou, antes de qualquer viagem.'},
+      {tipo:'multi',arte:'coracao',titulo:'Marque o que a fé de Abraão tinha.',
+       opcoes:['Confiança em Deus','Pressa de ver tudo pronto','Coragem para partir','Certeza de que ele era perfeito','Paciência para esperar','Medo de Deus falhar'],
+       certas:[0,2,4],pontos:25,
+       explica:'Muito bem! Confiança, coragem e paciência: a promessa demorou anos e ele continuou crendo.',
+       dica:'Três palavras combinam com quem espera confiando. As outras três não.'}
+    ]
+  },
+  {n:4,titulo:'José, do poço ao palácio',emBreve:true},
+  {n:5,titulo:'Moisés e a travessia do mar',emBreve:true},
+  {n:6,titulo:'As muralhas de Jericó',emBreve:true},
+  {n:7,titulo:'Rute, a amiga fiel',emBreve:true},
+  {n:8,titulo:'Davi e o gigante',emBreve:true},
+  {n:9,titulo:'Daniel na cova dos leões',emBreve:true},
+  {n:10,titulo:'Ester, a rainha corajosa',emBreve:true},
+  {n:11,titulo:'A noite em que Jesus nasceu',emBreve:true},
+  {n:12,titulo:'Jesus acalma a tempestade',emBreve:true},
+  {n:13,titulo:'A manhã da ressurreição',emBreve:true}
 ];
 
 /* ===================== SALVAMENTO NO APARELHO ===================== */
